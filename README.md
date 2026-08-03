@@ -49,6 +49,10 @@ installation can add Edge servers to spread connection handling across machines.
 Each installation uses its own server identity. The supported backup and migration process can
 preserve that identity when a server is moved. See [Self-hosting](SELF-HOSTING.md).
 
+Download the Linux or Windows Server/Edge packages and follow the complete setup procedure in the
+[Administrator installation guide](ADMINISTRATOR-GUIDE.md). Client installers remain specific to
+the server that generates them and are downloaded from that server's management page.
+
 ## Important limits
 
 End-to-end encryption does not protect a device that is already infected, an untrusted or modified
@@ -65,6 +69,7 @@ service level. See [Disclaimer](DISCLAIMER.md).
 - [Security and encryption](SECURITY.md)
 - [Privacy](PRIVACY.md)
 - [Self-hosting](SELF-HOSTING.md)
+- [Server and Edge installation](ADMINISTRATOR-GUIDE.md)
 - [Why the project can be free](FREE-AND-PUBLIC.md)
 - [Frequently asked questions](FAQ.md)
 - [Disclaimer and user responsibilities](DISCLAIMER.md)

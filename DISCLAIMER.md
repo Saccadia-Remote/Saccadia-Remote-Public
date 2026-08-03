@@ -7,6 +7,14 @@ Saccadia Remote is provided **as is** and **as available**. By installing or usi
 responsible for deciding whether it is appropriate for your devices, information, and level of
 risk.
 
+## Installation consent
+
+Starting any Saccadia Remote installation is an explicit administrator or user decision. By
+accepting the installer notice and continuing, you confirm that you understand the software is
+provided as is, that failures and unintended consequences are possible, and that you accept
+responsibility for choosing to install it in your environment. If you do not accept this, cancel
+the installation and do not use the software.
+
 ## Authorized use only
 
 Use Saccadia Remote only with computers you own or are explicitly allowed to access. Do not use it
