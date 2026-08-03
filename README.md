@@ -1,8 +1,16 @@
+<p align="center">
+  <img src="assets/LogoHorizontal.Black.png" alt="Saccadia Remote" width="640">
+</p>
+
 # Saccadia Remote
 
 Saccadia Remote is a free remote desktop application for connecting to a computer from another
 location. It is designed so that the servers which help devices find each other do not need access
 to the contents of a remote session.
+
+The project's public Saccadia Remote server is available at
+[SaccadiaRemote.com](https://saccadiaremote.com). You can use that installation or run an independent
+server for your own users.
 
 The screen, sound, keyboard and mouse input, clipboard, chat, and transferred files are encrypted
 on one participating device and decrypted only on the other. Coordinator, Edge, and relay servers

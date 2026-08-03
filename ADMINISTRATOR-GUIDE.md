@@ -6,14 +6,14 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.2.61**.
+Current package version: **0.2.62**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.2.61-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.2.61-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.2.61-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.2.61-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.2.62-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.2.62-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.2.62-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.2.62-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -21,9 +21,15 @@ Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before ext
 
 Every package includes `DISCLAIMER.md`. Installation is blocked until the administrator explicitly
 accepts that the software is supplied **as is**, without a warranty or guaranteed service level,
-and that installing it can have unintended consequences. Linux uses the exact environment value
-`SACCADIA_ACCEPT_DISCLAIMER=YES`; Windows uses the `-AcceptDisclaimer` switch. Do not set these
-options until you have read and accepted the notice.
+and that installing it can have unintended consequences. An interactive installation displays the
+notice and requires the exact response `I ACCEPT`. It then prints the selected role, endpoints,
+ports, certificate sources, persistent-data location, and operational reminders. No system change
+is made until the administrator reviews that plan and types `INSTALL`.
+
+For deliberate unattended automation, Linux requires both exact environment values
+`SACCADIA_ACCEPT_DISCLAIMER=YES` and `SACCADIA_CONFIRM_INSTALLATION=YES`; Windows requires both
+`-AcceptDisclaimer` and `-ConfirmInstallation`. Do not use these options until the notice and the
+complete command have been reviewed.
 
 ## Network planning
 
@@ -49,7 +55,7 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.2.61-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.2.62-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
@@ -58,7 +64,6 @@ name clients will actually reach:
 
 ```bash
 sudo env \
-  SACCADIA_ACCEPT_DISCLAIMER=YES \
   SACCADIA_COORDINATOR_HOST=server.example.com \
   bash /opt/saccadia-remote/deploy/linux/install.sh
 ```
@@ -78,7 +83,6 @@ Coordinator cluster pin from its management status page, then run:
 
 ```bash
 sudo env \
-  SACCADIA_ACCEPT_DISCLAIMER=YES \
   SACCADIA_EDGE_NODE_ID=edge-2 \
   SACCADIA_EDGE_SIGNALLING_HOST=edge2.example.com \
   SACCADIA_COORDINATOR_HOST=server.example.com \
@@ -110,7 +114,7 @@ Unblock the extracted files and install Coordinator, the first local Edge, and f
 ```powershell
 Set-Location C:\SaccadiaRemote\Server
 Get-ChildItem -Recurse -File | Unblock-File
-.\Install.ps1 -CoordinatorHost server.example.com -AcceptDisclaimer
+.\Install.ps1 -CoordinatorHost server.example.com
 ```
 
 The full-node installer reads the newly generated Coordinator and Edge pins locally, adds the
@@ -136,8 +140,7 @@ Get-ChildItem -Recurse -File | Unblock-File
   -NodeId edge-2 `
   -SignallingWebSocketUrl wss://edge2.example.com:5100/ws `
   -CoordinatorAddress https://server.example.com:7000 `
-  -CoordinatorClusterPublicKeyPin $coordinator.clusterPublicKeyPin `
-  -AcceptDisclaimer
+  -CoordinatorClusterPublicKeyPin $coordinator.clusterPublicKeyPin
 ```
 
 Read the additional Edge pins and register their exact binding on the Coordinator machine:
