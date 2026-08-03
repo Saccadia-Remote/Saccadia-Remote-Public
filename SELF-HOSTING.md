@@ -29,8 +29,9 @@ The supported protected export/import process can move a server while preserving
 When the same public name and identity are retained, installed clients do not need to accept an
 unexpected server key. A planned change to a different key must be coordinated explicitly.
 
-Detailed installation commands, service locations, network settings, and operational limits are
-included with the server package rather than published in this user-facing overview.
+Detailed downloads, installation commands, service locations, Edge registration, certificate
+behavior, and network settings are available in the
+[Administrator installation guide](ADMINISTRATOR-GUIDE.md).
 
 ## What self-hosting changes
 
