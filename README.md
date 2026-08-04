@@ -8,9 +8,21 @@ Saccadia Remote is a free remote desktop application for connecting to a compute
 location. It is designed so that the servers which help devices find each other do not need access
 to the contents of a remote session.
 
-The project's public Saccadia Remote server is available at
-[SaccadiaRemote.com](https://saccadiaremote.com). You can use that installation or run an independent
-server for your own users.
+## Official service and software
+
+The project's only official public Saccadia Remote server is
+[SaccadiaRemote.com](https://saccadiaremote.com). It provides the client installer configured for
+that service. If you want to use the official public server, check the address carefully and
+download its client from that exact website.
+
+Official Server and Edge distributions for running your own installation are available only from
+this [public Git repository](https://github.com/Saccadia-Remote/Saccadia-Remote-Public). Similarly
+named sites, repositories, servers, and installers are not operated or endorsed by the project.
+
+A client installer obtained from another source may be configured for an independent server and
+therefore asks you to trust that server operator and that copy of the application. This is a normal
+part of self-hosting, but it must not be confused with the official public server. You can also use
+the Server and Edge packages from this repository to run an independent server for your own users.
 
 The screen, sound, keyboard and mouse input, clipboard, chat, and transferred files are encrypted
 on one participating device and decrypted only on the other. Coordinator, Edge, and relay servers
