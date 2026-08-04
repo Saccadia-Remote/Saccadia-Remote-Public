@@ -85,6 +85,7 @@ service level. See [Disclaimer](DISCLAIMER.md).
 
 ## Documentation
 
+- [User guide](USER-GUIDE.md)
 - [How the system works](ARCHITECTURE.md)
 - [Security and encryption](SECURITY.md)
 - [Privacy](PRIVACY.md)
