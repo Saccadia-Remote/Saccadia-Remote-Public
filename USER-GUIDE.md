@@ -183,21 +183,35 @@ The session header shows:
 - the number of active and available relay paths.
 
 The large center area is the remote screen. Keyboard and mouse input are sent only when the host has
-allowed remote control. The red floating button opens fullscreen and session actions; it can be
-dragged to a more convenient position.
+allowed remote control.
 
-Available session actions include:
+### Use the session master button
 
-- enter or leave fullscreen;
-- open chat;
-- open the screen-recording panel;
-- show or hide diagnostics;
-- enable or mute remote audio;
-- set a maximum bitrate;
-- use adaptive picture quality or select a quality level;
-- keep the host resolution or request the viewer resolution;
-- request **Ctrl+Alt+Del** when the host platform permits it;
-- disconnect from the host.
+The red floating button at the edge of the remote screen is the session **master button**. It keeps
+the important viewer controls available even in fullscreen mode:
+
+- **Left-click** it to switch between the maximized fullscreen view and normal windowed mode.
+- **Right-click** it to open the session context menu.
+- The button is **draggable**: hold the left mouse button and move it to any convenient place where
+  it does not cover useful screen content. Its relative position and the fullscreen preference are
+  remembered separately for that remote computer.
+
+![Session master button and context menu](assets/user-guide/remote-session-master-menu.png)
+
+The context menu contains:
+
+| Item | What it does |
+| --- | --- |
+| **Chat** | Opens or closes the encrypted session chat panel. |
+| **Screen recording** | Opens the recording panel. This item is shown only when the host grants recording permission. |
+| **Diagnostics** | Shows or hides live viewer-side playback and connection diagnostics over the remote screen. |
+| **Audio** | Enables or mutes playback of sound received from the host. A check mark means audio is enabled. |
+| **Max bitrate** | Limits the remote video stream from 1 Mbit/s up to the maximum supported by the current configuration. Unavailable values are disabled. |
+| **Picture quality** | Uses adaptive quality or a fixed quality from 50% to 100%. Adaptive mode reacts to current transport conditions. |
+| **Screen resolution** | Keeps the host's current resolution or requests a resolution matching the viewer display. The requested mode depends on host-platform support. |
+| **Send Ctrl+Alt+Del** | Requests the secure attention sequence when the host platform and permissions allow it. |
+| **Source: real/test** | Switches between the real remote desktop and the built-in test source used for troubleshooting. Select it again to return to the other source. |
+| **Disconnect** | Ends the current remote session. |
 
 Higher bitrate and picture quality can improve fine detail but require more network capacity. If the
 picture becomes unstable on a slow connection, try adaptive quality or a lower bitrate before
@@ -205,15 +219,17 @@ changing unrelated system settings.
 
 ## Use chat, recording, clipboard, and files
 
-![Session chat and screen-recording controls](assets/user-guide/remote-session-tools.png)
-
 **Chat** works independently from keyboard and mouse control when the host grants chat permission.
 Messages are part of the encrypted session and are not stored as server-side chat history by the
 standard service.
 
+![Session chat panel](assets/user-guide/remote-session-chat.png)
+
 **Screen recording** is available only when the host permits it. Use the panel to start, pause,
 stop, and save a recording. Treat recordings as sensitive files: the person operating the viewer is
 responsible for consent, lawful use, storage, and sharing.
+
+![Session screen-recording panel](assets/user-guide/remote-session-recording.png)
 
 **Text clipboard** can synchronize supported copied text when remote-control/clipboard permission
 is enabled. Avoid copying passwords or other secrets while a session is active unless the other
@@ -232,16 +248,18 @@ The Settings window contains:
 
 - the installed client version and update status;
 - the signalling server address;
-- the optional SHA-256 server key used by configured private installations;
+- the SHA-256 public key pin used to verify the configured server;
 - an optional fixed relay listener port;
 - the maximum total bandwidth this client contributes as a relay;
 - one-time-password access;
 - Wake-on-LAN participation;
 - local diagnostic logging.
 
-The screenshot intentionally omits a server key. A provisioned installer supplies the values needed
-for its own server. Do not change the server address or key unless a trusted server administrator
-gave you replacement values. A client configured for another server joins that independent service.
+The screenshot shows the official public service address and its public verification pin. A pin is
+not a password or private key: the client uses it to recognize the expected server. A provisioned
+installer supplies the values needed for its own server. Do not change the server address or pin
+unless a trusted server administrator gave you replacement values. A client configured for another
+server joins that independent service.
 
 Leave the relay listener port empty for automatic selection unless a network administrator requires
 a fixed port. The aggregate relay limit controls forwarded encrypted traffic; it does not set the
