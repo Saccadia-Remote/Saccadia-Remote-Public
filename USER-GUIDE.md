@@ -14,10 +14,12 @@ private connection information is included.
 - [Understand the main window](#understand-the-main-window)
 - [Prepare a computer for incoming access](#prepare-a-computer-for-incoming-access)
 - [Connect to another computer](#connect-to-another-computer)
+- [Manage recent connections](#manage-recent-connections)
 - [Approve an incoming connection](#approve-an-incoming-connection)
 - [Control an active remote session](#control-an-active-remote-session)
 - [Use chat, recording, clipboard, and files](#use-chat-recording-clipboard-and-files)
 - [Change application settings](#change-application-settings)
+- [Review diagnostic logs and relay health](#review-diagnostic-logs-and-relay-health)
 - [Troubleshoot a connection](#troubleshoot-a-connection)
 - [Use Saccadia Remote safely](#use-saccadia-remote-safely)
 
@@ -85,13 +87,22 @@ The top part of the window contains the controls needed for most connections:
    can be changed for each active incoming connection.
 4. **Remote Device ID** is where you enter the host ID you want to reach.
 5. **Connect** starts a connection attempt. **Cancel** stops an attempt that is still waiting.
-6. **Recent connections** keeps useful local history. A tile can show availability, saved
-   authorization, a favorite marker, a custom name, and the last connection time.
+6. **Recent connections** keeps useful local history. A tile or compact row can show availability,
+   saved authorization, a favorite marker, a custom name, and the last connection time. The list
+   button in the tab header switches between tiles and rows.
 7. The bottom status bar shows whether the client is connected to signalling, whether its relay is
    available, and which Edge currently carries its signalling connection.
 
 The gear button opens settings. The question-mark button opens the public project documentation in
-your browser. Donation links are optional and do not affect application features.
+your browser. When diagnostic logging is enabled, a log-list button appears below Help and opens the
+local logs and relay-health window. Donation links are optional and do not affect application
+features.
+
+Closing the main window normally returns Saccadia Remote to the Windows notification area instead
+of ending it. The tray menu provides **Open**, **Restart**, and **Exit**. **Restart** may request
+Windows administrator confirmation because it restarts the Saccadia host and relay services before
+opening a fresh client window. If confirmation is cancelled or a service cannot restart, the
+original client remains open and reports the problem.
 
 Availability is refreshed periodically. A recently disconnected computer can take a short time to
 change from online to unavailable, and a computer that has just opened the application may need a
@@ -153,6 +164,31 @@ the key icon on a recent-connection tile.
 
 Selecting a recent-connection tile fills its ID and starts the same normal connection process. Use
 the star to keep an important computer easy to find and the pencil to give it a local friendly name.
+
+## Manage recent connections
+
+Recent connections are stored locally for convenience. The application retains up to 30 entries,
+placing favorites first and then the most recently used computers.
+
+Tiles are the default. Select the list button in the **Recent connections** tab header to switch to
+compact rows; select it again to return to tiles. This choice is remembered after the application
+restarts.
+
+![Recent connections displayed as compact rows](assets/user-guide/recent-connections-list.png)
+
+Each tile and row provides the same information and actions:
+
+- the star marks or unmarks a favorite;
+- the colored status dot shows the last known availability;
+- selecting the ID, name, time, or another free area starts a connection;
+- the key shows that saved authorization exists and lets you remove it;
+- the pencil changes the local friendly name;
+- the reset symbol restores the computer name reported by the remote device;
+- the remove button deletes the entry from local history.
+
+Selecting an action button performs only that action; it does not start a connection. Removing a
+history entry does not uninstall Saccadia Remote, change the remote computer, or revoke saved
+authorization; use the key action separately when you also want to remove that credential.
 
 ## Approve an incoming connection
 
@@ -269,6 +305,33 @@ Wake-on-LAN is optional and publishes the network profile needed to request that
 woken. Leave it disabled if you do not need it. Diagnostic logging is local and disabled by default;
 logs can contain connection metadata, so review them before sharing.
 
+## Review diagnostic logs and relay health
+
+Select **Enable diagnostic logging** in Settings and then select **Save** when you need to
+investigate a problem. A log-list button then appears below Help in the main window. Select it to
+open the protected **Diagnostic logs** window.
+
+The left side lists Saccadia Remote log files. Select one file to display its readable text preview
+on the right. You can select and copy text from the preview. The checkbox beside each file marks it
+for a file operation, and the checkbox in the list header selects or clears every listed file.
+
+- **Copy selected** places the checked complete log files on the clipboard so they can be pasted
+  into a folder or attached to a support message. If nothing is checked, the button becomes
+  **Copy all**.
+- **Delete selected** asks for confirmation and then cleans only the checked files. A log currently
+  being written may be cleared and kept in place instead of being removed. Other failures are
+  reported without stopping cleanup of the remaining files.
+- The preview may show only the newest part of a very large log, but Copy exports the complete file.
+
+The relay panel at the bottom reports the local Windows service, control channel, listener, active
+relay pairs, UDP registration, warmup results, and the latest acknowledgement or failure. These
+details help distinguish a local relay problem from a general signalling problem; opening the
+window does not contact the server for additional diagnostics.
+
+Logs can contain device IDs, connection times, network addresses, and error details. Read them
+before sharing, send only the files needed for the investigation, and disable logging again when
+you no longer need it.
+
 ## Troubleshoot a connection
 
 ### The host appears unavailable
@@ -293,6 +356,16 @@ logs can contain connection metadata, so review them before sharing.
 - For control, clipboard, or files, verify the first permission button.
 - For sound, chat, cursor display, recording, or protected UI, verify its separate button.
 - Open the session menu and check local Audio, bitrate, quality, and resolution choices.
+
+### A relay is unavailable or missing
+
+- Enable diagnostic logging, save Settings, and open the log-list button below Help.
+- In the relay panel, check that the Windows service is running, the control channel is available,
+  and UDP rendezvous is registered.
+- Review the latest failure and warmup counts. **Restart** in the tray menu restarts the client and
+  its local host/relay services and may restore a transient local state, but repeated failures
+  should be investigated rather than hidden by disabling the firewall or other system protection.
+- Copy only the relevant logs if you need to send the problem to support.
 
 ### The picture or sound is unstable
 
