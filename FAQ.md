@@ -35,6 +35,25 @@ Internet routes can fail or slow down independently because of routers, firewall
 or provider restrictions. More than one available path lets a session recover without trusting a
 single relay with plaintext data.
 
+## Will an open session receive a relay that reconnects later?
+
+Yes. Relay assignments belong to a specific listener generation. When a relay is updated, restarted,
+or reconnects, the server identifies only the open sessions that used the old generation and sends
+them a fresh assignment after the replacement becomes ready. The relay count can remain below its
+target briefly while readiness and a bounded failure cooldown complete, but closing and reopening
+the session should not be required.
+
+## Why does a remote host cursor sometimes have a label?
+
+When host-cursor display is allowed, physical mouse movement appears without a label. Another
+Saccadia Remote viewer is identified by its computer name. Parsec and other unknown applications
+that inject mouse movement appear as **External** because the Windows low-level mouse interface
+does not reliably provide the source process. The current viewer's own movement is not shown as a
+duplicate host-cursor overlay.
+
+This host overlay is separate from the pointer controlled by the current viewer. Its cursor shape
+continues to follow the host even when host-cursor display is disabled.
+
 ## Is my computer used as an unlimited public relay?
 
 No relay is intended to be unlimited. Relay participation and available bandwidth are controlled

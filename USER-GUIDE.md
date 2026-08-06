@@ -219,7 +219,15 @@ The session header shows:
 - the number of active and available relay paths.
 
 The large center area is the remote screen. Keyboard and mouse input are sent only when the host has
-allowed remote control.
+allowed remote control. The pointer controlled by this viewer follows the current cursor shape
+reported by the host even when the separate **Show host cursor** permission is disabled.
+
+**Show host cursor** controls an additional overlay for movement that did not come from the current
+viewer. Physical mouse movement on the host appears without a label. Movement from another
+Saccadia Remote session is labelled with that viewer computer's name, while movement injected by
+Parsec or another external application is labelled **External**. Windows does not reliably identify
+the process behind arbitrary injected mouse input, so Saccadia Remote does not guess an application
+name. The current viewer's own movement is not duplicated as a host-cursor overlay.
 
 ### Use the session master button
 
@@ -324,9 +332,11 @@ for a file operation, and the checkbox in the list header selects or clears ever
 - The preview may show only the newest part of a very large log, but Copy exports the complete file.
 
 The relay panel at the bottom reports the local Windows service, control channel, listener, active
-relay pairs, UDP registration, warmup results, and the latest acknowledgement or failure. These
-details help distinguish a local relay problem from a general signalling problem; opening the
-window does not contact the server for additional diagnostics.
+relay pairs, UDP registration, warmup results, and the latest acknowledgement or failure. On
+Windows it also checks every required product firewall rule and lists a missing or mismatched rule,
+including its direction, protocol, profile scope, action, enabled state, and executable path. This
+inspection is read-only: opening or refreshing the window never changes Windows Firewall and does
+not contact the server for additional diagnostics.
 
 Logs can contain device IDs, connection times, network addresses, and error details. Read them
 before sharing, send only the files needed for the investigation, and disable logging again when
@@ -346,7 +356,9 @@ you no longer need it.
 
 - Check ordinary Internet access and the system clock.
 - Verify that the client came from the intended server.
-- Ensure Windows Defender Firewall contains the installer-created Saccadia Remote rules.
+- Ensure Windows Defender Firewall contains the installer-created Saccadia Remote rules. The
+  **Diagnostic logs** window reports exactly which required rule is missing or misconfigured without
+  changing it.
 - Do not solve the problem by disabling the firewall globally.
 - On a managed or filtered network, ask the administrator whether the configured service is allowed.
 
@@ -362,9 +374,13 @@ you no longer need it.
 - Enable diagnostic logging, save Settings, and open the log-list button below Help.
 - In the relay panel, check that the Windows service is running, the control channel is available,
   and UDP rendezvous is registered.
-- Review the latest failure and warmup counts. **Restart** in the tray menu restarts the client and
-  its local host/relay services and may restore a transient local state, but repeated failures
-  should be investigated rather than hidden by disabling the firewall or other system protection.
+- Review the latest failure and warmup counts. The server retries an underfilled open session and
+  migrates it when a relay reconnects with a new listener generation; normally you do not need to
+  close and recreate the session. A path can remain below its target briefly while failure cooldown
+  expires and the replacement is confirmed.
+- **Restart** in the tray menu restarts the client and its local host/relay services and may restore
+  a transient local state, but repeated failures should be investigated rather than hidden by
+  disabling the firewall or other system protection.
 - Copy only the relevant logs if you need to send the problem to support.
 
 ### The picture or sound is unstable
