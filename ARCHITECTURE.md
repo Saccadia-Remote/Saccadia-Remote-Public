@@ -38,6 +38,13 @@ unavailable, another route can be used without treating the relay as a trusted r
 Relay use is limited by configuration; an online computer is not intended to become an unlimited
 public traffic server.
 
+Each assignment belongs to one exact relay-listener generation. If that relay client is updated,
+restarted, or reconnects, the Coordinator invalidates only the open sessions that used the old
+generation and gives them a fresh assignment when the replacement is ready. A reverse index makes
+this work proportional to the affected sessions rather than requiring a scan of every active
+session. Old route tokens, leases, and failure cooldowns cannot be applied to the replacement
+listener merely because it has the same device ID.
+
 ## What is stored centrally
 
 The server keeps the minimum registration and connection information needed to operate the
