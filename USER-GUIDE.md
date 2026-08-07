@@ -374,10 +374,14 @@ you no longer need it.
 - Enable diagnostic logging, save Settings, and open the log-list button below Help.
 - In the relay panel, check that the Windows service is running, the control channel is available,
   and UDP rendezvous is registered.
-- Review the latest failure and warmup counts. The server retries an underfilled open session and
-  migrates it when a relay reconnects with a new listener generation; normally you do not need to
-  close and recreate the session. A path can remain below its target briefly while failure cooldown
-  expires and the replacement is confirmed.
+- Review the latest failure and warmup counts. The server keeps underfilled open sessions in a
+  cancellation-safe retry index and migrates them when a relay reconnects with a new listener
+  generation; normally you do not need to close and recreate the session. A path can remain below
+  its target briefly while failure cooldown expires and the replacement is confirmed.
+- `SaccadiaRemoteRelay` is installed for automatic start and recovery after both crash and non-crash
+  failures. If Windows still reports it as stopped, start it from Services or use tray **Restart**,
+  then retain the Critical RelayService log entry for investigation instead of disabling security
+  software.
 - **Restart** in the tray menu restarts the client and its local host/relay services and may restore
   a transient local state, but repeated failures should be investigated rather than hidden by
   disabling the firewall or other system protection.

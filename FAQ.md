@@ -39,9 +39,14 @@ single relay with plaintext data.
 
 Yes. Relay assignments belong to a specific listener generation. When a relay is updated, restarted,
 or reconnects, the server identifies only the open sessions that used the old generation and sends
-them a fresh assignment after the replacement becomes ready. The relay count can remain below its
+them a fresh assignment after the replacement becomes ready. A cancellation-safe index retains
+underfilled sessions even across signalling-route handovers. The relay count can remain below its
 target briefly while readiness and a bounded failure cooldown complete, but closing and reopening
 the session should not be required.
+
+On Windows the RelayService is configured for automatic restart after crash and non-crash failures.
+A fatal local listener failure is written to its Critical log before Service Control Manager restarts
+it.
 
 ## Why does a remote host cursor sometimes have a label?
 
