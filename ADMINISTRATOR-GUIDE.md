@@ -6,14 +6,14 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.2.68**.
+Current package version: **0.2.94**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.2.68-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.2.68-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.2.68-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.2.68-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.2.94-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.2.94-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.2.94-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.2.94-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -48,6 +48,45 @@ host/network firewalls as applicable.
 Only management 5443 is intended for a browser. Port 5000 is client bootstrap, 7000 is cluster mTLS,
 and long-lived client WebSockets terminate directly on Edge.
 
+## Protect the detailed status page
+
+The detailed `/status` page and `/api/status` require one administrator password. Downloads remain
+public, and `/health` exposes only minimal liveness for service orchestration. Configure the password
+before opening the status page. Linux full-node commands run inside the Coordinator container:
+
+```bash
+cd /opt/saccadia-remote
+sudo docker compose -f deploy/linux/compose.yaml exec server \
+  dotnet /app/SaccadiaRemote.ServerService.dll status-password set
+```
+
+Windows full-node commands require an elevated terminal:
+
+```powershell
+.\Coordinator\SaccadiaRemote.ServerService.exe status-password set
+```
+
+Input is hidden and confirmed. Automation may pipe a secret only with explicit `--password-stdin`;
+`--generate` prints one strong password once. Use `status-password status` to inspect whether a
+password is configured and `status-password reset` to remove it. Reset immediately invalidates all
+browser sessions and blocks detailed browser status until a new password is set. The stored file
+contains a salted password verifier, never the plaintext password.
+
+Login is limited globally to five attempts in a rolling 60-second interval, regardless of source IP.
+If an attacker occupies that window, inspect the same complete status snapshot without HTTP:
+
+```bash
+sudo docker compose -f deploy/linux/compose.yaml exec server \
+  dotnet /app/SaccadiaRemote.ServerService.dll status --watch
+```
+
+```powershell
+.\Coordinator\SaccadiaRemote.ServerService.exe status --watch
+```
+
+The local status endpoint is restricted to the service identity/administrators and does not accept a
+password. Press Ctrl+C to stop watch mode.
+
 ## Linux full node
 
 Requirements: x86-64 Linux, root access, Docker Engine with Compose v2, OpenSSL, and `tar`. Extract
@@ -55,7 +94,7 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.2.68-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.2.94-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
@@ -68,8 +107,9 @@ sudo env \
   bash /opt/saccadia-remote/deploy/linux/install.sh
 ```
 
-Open `https://server.example.com:5443/` after the containers become healthy. A standard installation
-creates unique persistent certificates locally. A browser will warn about the management certificate
+Open `https://server.example.com:5443/status` after the containers become healthy and the management
+password is configured. A standard installation creates unique persistent certificates locally. A
+browser will warn about the management certificate
 until the operator configures a public-CA PFX; client and cluster trust do not depend on browser trust
 and use authenticated SPKI pins.
 
@@ -124,11 +164,12 @@ readiness. No manual JSON editing is required.
 ## Additional Windows Edge
 
 Install the separate Windows Edge package into a permanent directory such as
-`C:\SaccadiaRemote\Edge` on another machine. First read the Coordinator cluster pin:
+`C:\SaccadiaRemote\Edge` on another machine. First read the Coordinator cluster pin from the
+elevated local status command:
 
 ```powershell
-$coordinator = curl.exe -ks https://127.0.0.1:5443/api/status | ConvertFrom-Json
-$coordinator.clusterPublicKeyPin
+$status = .\Coordinator\SaccadiaRemote.ServerService.exe status
+($status | Select-String '^clusterPublicKeyPin: ').Line.Split(': ', 2)[1]
 ```
 
 Then install the additional Edge:
