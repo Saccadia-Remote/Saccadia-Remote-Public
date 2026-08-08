@@ -6,14 +6,14 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.2.95**.
+Current package version: **0.2.96**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.2.95-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.2.95-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.2.95-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.2.95-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.2.96-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.2.96-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.2.96-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.2.96-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -56,38 +56,53 @@ and protection state are not part of the public response. Downloads remain publi
 exposes only minimal liveness for service orchestration. Configure the password before opening the
 status page. Linux full-node commands run inside the Coordinator container:
 
+In the browser header, Status is beside the Server brand. After authentication, Sign out appears
+beside Status; Overview and Downloads remain in the right-hand public navigation group. Sign out
+deletes the management session and returns the browser to public Overview.
+
 ```bash
 cd /opt/saccadia-remote
 sudo docker compose -f deploy/linux/compose.yaml exec server \
   dotnet /app/SaccadiaRemote.ServerService.dll status-password set
+sudo docker compose -f deploy/linux/compose.yaml exec server \
+  dotnet /app/SaccadiaRemote.ServerService.dll status-password status
+sudo docker compose -f deploy/linux/compose.yaml exec server \
+  dotnet /app/SaccadiaRemote.ServerService.dll status-password reset
 ```
 
 Windows full-node commands require an elevated terminal:
 
 ```powershell
 .\Coordinator\SaccadiaRemote.ServerService.exe status-password set
+.\Coordinator\SaccadiaRemote.ServerService.exe status-password status
+.\Coordinator\SaccadiaRemote.ServerService.exe status-password reset
 ```
 
-Input is hidden and confirmed. Automation may pipe a secret only with explicit `--password-stdin`;
-`--generate` prints one strong password once. Use `status-password status` to inspect whether a
-password is configured and `status-password reset` to remove it. Reset immediately invalidates all
-browser sessions and blocks detailed browser status until a new password is set. The stored file
+The `set` input is hidden and confirmed. Automation may pipe a secret only with explicit
+`--password-stdin`; `set --generate` prints one strong password once. The `status` subcommand reports
+whether a password is configured without exposing it. The `reset` subcommand immediately invalidates
+all browser sessions and blocks detailed browser status until a new password is set. The stored file
 contains a salted password verifier, never the plaintext password.
 
 Login is limited globally to five attempts in a rolling 60-second interval, regardless of source IP.
-If an attacker occupies that window, inspect the same complete status snapshot without HTTP:
+If an attacker occupies that window, inspect the same complete status snapshot without HTTP. Use
+`status` for a one-time snapshot or `status --watch` for continuously refreshed output:
 
 ```bash
+sudo docker compose -f deploy/linux/compose.yaml exec server \
+  dotnet /app/SaccadiaRemote.ServerService.dll status
 sudo docker compose -f deploy/linux/compose.yaml exec server \
   dotnet /app/SaccadiaRemote.ServerService.dll status --watch
 ```
 
 ```powershell
+.\Coordinator\SaccadiaRemote.ServerService.exe status
 .\Coordinator\SaccadiaRemote.ServerService.exe status --watch
 ```
 
-The local status endpoint is restricted to the service identity/administrators and does not accept a
-password. Press Ctrl+C to stop watch mode.
+The command uses administrator-only local IPC, does not consume browser login attempts, and does not
+accept or require the status password. Every browser status field is printed as a grep-friendly text
+path. Press Ctrl+C to stop watch mode.
 
 ## Linux full node
 
@@ -96,7 +111,7 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.2.95-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.2.96-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
