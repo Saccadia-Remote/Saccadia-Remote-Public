@@ -45,6 +45,13 @@ this work proportional to the affected sessions rather than requiring a scan of 
 session. Old route tokens, leases, and failure cooldowns cannot be applied to the replacement
 listener merely because it has the same device ID.
 
+When one session path fails, Coordinator sends both participants one generation-safe replacement
+that names the exact obsolete allocation. Each endpoint atomically exchanges that assignment slot,
+so different local timeout ordering cannot leave one side at four old/new paths while the other side
+has only three. A repeated replacement is harmless, and a stale replacement cannot evict an
+unrelated newer path. The fallback server relay therefore remains a fallback instead of appearing
+only because one participant rejected a valid client-relay replacement at capacity.
+
 ## What is stored centrally
 
 The server keeps the minimum registration and connection information needed to operate the
