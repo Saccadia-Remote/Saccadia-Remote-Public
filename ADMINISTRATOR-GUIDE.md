@@ -6,14 +6,14 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.2.94**.
+Current package version: **0.2.95**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.2.94-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.2.94-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.2.94-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.2.94-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.2.95-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.2.95-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.2.95-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.2.95-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -50,9 +50,11 @@ and long-lived client WebSockets terminate directly on Edge.
 
 ## Protect the detailed status page
 
-The detailed `/status` page and `/api/status` require one administrator password. Downloads remain
-public, and `/health` exposes only minimal liveness for service orchestration. Configure the password
-before opening the status page. Linux full-node commands run inside the Coordinator container:
+The overview page and its aggregate `/api/overview` data remain public. The detailed `/status` page
+and `/api/status` require one administrator password; detailed topology, resources, certificates,
+and protection state are not part of the public response. Downloads remain public, and `/health`
+exposes only minimal liveness for service orchestration. Configure the password before opening the
+status page. Linux full-node commands run inside the Coordinator container:
 
 ```bash
 cd /opt/saccadia-remote
@@ -94,7 +96,7 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.2.94-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.2.95-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
