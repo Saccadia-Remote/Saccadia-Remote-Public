@@ -38,6 +38,13 @@ unavailable, another route can be used without treating the relay as a trusted r
 Relay use is limited by configuration; an online computer is not intended to become an unlimited
 public traffic server.
 
+Coordinator chooses exactly one route independently for each device-to-relay leg. A device uses
+IPv4 loopback for its own relay service, one exact private endpoint when registered interface
+prefixes show a shared LAN, and UDP rendezvous/hole punching for different subnets. Clients do not
+receive a list of LAN/public alternatives and do not silently fall back between those route classes.
+If the selected leg cannot pair and confirm end-to-end encryption, it fails visibly and Coordinator
+replaces the assignment through the normal recovery path.
+
 Each assignment belongs to one exact relay-listener generation. If that relay client is updated,
 restarted, or reconnects, the Coordinator invalidates only the open sessions that used the old
 generation and gives them a fresh assignment when the replacement is ready. A reverse index makes
