@@ -6,14 +6,14 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.3.11**.
+Current package version: **0.3.16**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.3.11-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.3.11-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.3.11-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.3.11-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.3.16-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.3.16-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.3.16-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.3.16-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
