@@ -1,11 +1,11 @@
 ﻿# Saccadia Remote server packages
 
-Version **0.3.101**
+Version **0.3.102**
 
-- [Linux x64 full Server](SaccadiaRemote-Server-0.3.101-linux-x64.tar.gz)
-- [Linux x64 Edge](SaccadiaRemote-Edge-0.3.101-linux-x64.tar.gz)
-- [Windows x64 full Server](SaccadiaRemote-Server-0.3.101-windows-x64.zip)
-- [Windows x64 Edge](SaccadiaRemote-Edge-0.3.101-windows-x64.zip)
+- [Linux x64 full Server](SaccadiaRemote-Server-0.3.102-linux-x64.tar.gz)
+- [Linux x64 Edge](SaccadiaRemote-Edge-0.3.102-linux-x64.tar.gz)
+- [Windows x64 full Server](SaccadiaRemote-Server-0.3.102-windows-x64.zip)
+- [Windows x64 Edge](SaccadiaRemote-Edge-0.3.102-windows-x64.zip)
 - [SHA-256 checksums](SHA256SUMS)
 
 Read the [administrator installation guide](../ADMINISTRATOR-GUIDE.md) and
