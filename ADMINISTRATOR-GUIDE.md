@@ -6,14 +6,16 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.3.25**.
+Current package version: **0.4.33**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.3.25-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.3.25-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.3.25-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.3.25-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.33-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.33-linux-x64.tar.gz) |
+| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.33-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.33-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.33-windows-x64.zip) |
+| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.33-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -43,7 +45,7 @@ host/network firewalls as applicable.
 | 5443 | TCP | Browser management, diagnostics, and client downloads |
 | 7000 | TCP | Coordinator-to-Edge mTLS |
 | 5100 | TCP | First Edge client WSS; use another port for additional local Edge nodes |
-| 5001 | UDP | Low-use fallback relay |
+| 5001 | UDP | Standalone server-relay listener, when installed |
 
 Only management 5443 is intended for a browser. Port 5000 is client bootstrap, 7000 is cluster mTLS,
 and long-lived client WebSockets terminate directly on Edge.
@@ -111,12 +113,12 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.3.25-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.4.33-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
-Install Coordinator, the first Edge, and the fallback relay. Replace `server.example.com` with the
-name clients will actually reach:
+Install Coordinator and the first local Edge. Replace `server.example.com` with the name clients
+will actually reach:
 
 ```bash
 sudo env \
@@ -132,6 +134,45 @@ and use authenticated SPKI pins.
 
 Persistent state is under `/var/lib/saccadia-remote`. Re-running the same installer preserves the
 database, allowlist, identities, and pins.
+
+## Standalone Linux ServerRelay
+
+ServerRelay is not bundled into the full Server installation. Install it on the same machine or on
+another machine that has a stable UDP endpoint reachable by clients. Extract the ServerRelay
+archive into its own permanent directory:
+
+```bash
+sudo install -d -m 0750 /opt/saccadia-remote-server-relay
+sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.33-linux-x64.tar.gz \
+  -C /opt/saccadia-remote-server-relay
+```
+
+Configure the Coordinator address and public UDP endpoint, then run the relay installer:
+
+```bash
+sudo env \
+  SACCADIA_COORDINATOR_HOST=server.example.com \
+  SACCADIA_RELAY_PUBLIC_HOST=relay.example.com \
+  SACCADIA_RELAY_PUBLIC_PORT=5001 \
+  SACCADIA_RELAY_LIMIT_MBPS=50 \
+  bash /opt/saccadia-remote-server-relay/deploy/linux/install-server-relay.sh
+```
+
+`SACCADIA_RELAY_LIMIT_MBPS` is an aggregate cap for this relay. Use `0` for unlimited traffic or a
+positive value such as `50` for a fixed Mbit/s ceiling. The relay prints its fingerprint after
+installation. Register that fingerprint on the Coordinator together with the relay source IP
+address or CIDR before the relay can be offered to clients:
+
+```bash
+sudo docker compose -f /opt/saccadia-remote/deploy/linux/compose.yaml exec server \
+  dotnet /app/SaccadiaRemote.ServerService.dll server-relay add \
+  <relay-fingerprint> <relay-source-ip-or-cidr> \
+  --note "Primary server relay"
+```
+
+Use the protected status page or the local `server-relay` console commands to inspect, edit,
+enable, disable, or delete registered server relays. Server relays are offered only after ordinary
+client relay paths are unavailable.
 
 ## Additional Linux Edge
 
@@ -163,10 +204,9 @@ sudo bash /opt/saccadia-remote/deploy/linux/register-second-edge.sh \
 
 Requirements: 64-bit Windows, an elevated PowerShell session, and the .NET 8 ASP.NET Core Runtime
 x64. Extract the full Server ZIP into a permanent location such as `C:\SaccadiaRemote\Server`;
-Windows services run the bundled Coordinator, Edge, and fallback relay binaries from that
-directory.
+Windows services run the bundled Coordinator and Edge binaries from that directory.
 
-Unblock the extracted files and install Coordinator, the first local Edge, and fallback relay:
+Unblock the extracted files and install Coordinator and the first local Edge:
 
 ```powershell
 Set-Location C:\SaccadiaRemote\Server
@@ -175,8 +215,27 @@ Get-ChildItem -Recurse -File | Unblock-File
 ```
 
 The full-node installer reads the newly generated Coordinator and Edge pins locally, adds the
-complete Edge tuple to the allowlist, restarts Coordinator, and waits for Edge, admission, and relay
+complete Edge tuple to the allowlist, restarts Coordinator, and waits for Edge and admission
 readiness. No manual JSON editing is required.
+
+## Standalone Windows ServerRelay
+
+Install the separate Windows ServerRelay package into a permanent directory such as
+`C:\SaccadiaRemote\ServerRelay`. Run the installer from an elevated PowerShell session with the
+Coordinator address and relay public endpoint:
+
+```powershell
+Set-Location C:\SaccadiaRemote\ServerRelay
+Get-ChildItem -Recurse -File | Unblock-File
+.\Install.ps1 `
+  -CoordinatorUrl https://server.example.com:5000 `
+  -PublicHost relay.example.com `
+  -RelayPort 5001
+```
+
+The installed relay can print its local fingerprint with the `-fingerprint` startup option. Add the
+fingerprint and observed relay source IP/CIDR on the Coordinator through the protected status page
+or the local server-relay administration command before the Coordinator can use it.
 
 ## Additional Windows Edge
 
@@ -249,7 +308,7 @@ After installation verify:
 - management status reports Coordinator healthy;
 - every configured Edge is connected and ready;
 - client admission is `ready`;
-- fallback relay is online;
+- every required standalone server relay is registered, enabled, and online;
 - session endpoint logs show the Coordinator-selected `loopback`, `lan`, or `punching` mode and
   exact endpoint; a failed LAN/loopback leg is replaced rather than silently changing route class;
 - relay-pool `failedCooldown`, session-pool `underfilled`, and pending relay deliveries return to
