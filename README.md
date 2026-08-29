@@ -15,14 +15,16 @@ The project's only official public Saccadia Remote server is
 that service. If you want to use the official public server, check the address carefully and
 download its client from that exact website.
 
-Official Server and Edge distributions for running your own installation are available only from
-this [public Git repository](https://github.com/Saccadia-Remote/Saccadia-Remote-Public). Similarly
-named sites, repositories, servers, and installers are not operated or endorsed by the project.
+Official Server, Edge, and ServerRelay distributions for running your own installation are
+available only from this
+[public Git repository](https://github.com/Saccadia-Remote/Saccadia-Remote-Public). Similarly named
+sites, repositories, servers, and installers are not operated or endorsed by the project.
 
 A client installer obtained from another source may be configured for an independent server and
 therefore asks you to trust that server operator and that copy of the application. This is a normal
 part of self-hosting, but it must not be confused with the official public server. You can also use
-the Server and Edge packages from this repository to run an independent server for your own users.
+the Server, Edge, and ServerRelay packages from this repository to run an independent server for
+your own users.
 
 The screen, sound, keyboard and mouse input, clipboard, chat, and transferred files are encrypted
 on one participating device and decrypted only on the other. Coordinator, Edge, and relay servers
@@ -62,9 +64,10 @@ of session data.
 
 ## Run your own server
 
-Organizations and individual users can run their own Coordinator, Edge, and fallback relay. Server
-roles support Linux and Windows. A small installation can place the roles together, while a larger
-installation can add Edge servers to spread connection handling across machines.
+Organizations and individual users can run their own Coordinator, Edge, and standalone server
+relays. Server roles support Linux and Windows. A small installation can place Coordinator, the
+first Edge, and a separate ServerRelay on the same machine, while a larger installation can add Edge
+servers and server relays in other locations.
 
 Each installation uses its own server identity. The supported backup and migration process can
 preserve that identity when a server is moved. See [Self-hosting](SELF-HOSTING.md).

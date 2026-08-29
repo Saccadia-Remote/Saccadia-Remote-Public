@@ -31,7 +31,7 @@ networks, or provider restrictions may require another device or server to forwa
 
 A relay receives an already encrypted packet and forwards it. It does not receive the key needed
 to decrypt the session. The packet contents remain protected whether the path uses a participating
-client relay or the fallback server relay.
+client relay or a standalone server relay.
 
 Saccadia Remote can prepare more than one path for a session. If one route becomes slow or
 unavailable, another route can be used without treating the relay as a trusted reader of the data.
@@ -56,8 +56,8 @@ When one session path fails, Coordinator sends both participants one generation-
 that names the exact obsolete allocation. Each endpoint atomically exchanges that assignment slot,
 so different local timeout ordering cannot leave one side at four old/new paths while the other side
 has only three. A repeated replacement is harmless, and a stale replacement cannot evict an
-unrelated newer path. The fallback server relay therefore remains a fallback instead of appearing
-only because one participant rejected a valid client-relay replacement at capacity.
+unrelated newer path. Server relays therefore remain fallback paths instead of appearing only
+because one participant rejected a valid client-relay replacement at capacity.
 
 ## What is stored centrally
 
@@ -75,8 +75,8 @@ Saccadia Remote normally keeps that traffic away from the central connection ser
 online device mainly needs a small signalling connection and a compact online record.
 
 This means that connection capacity can be expanded by adding Edge servers, while expensive media
-bandwidth remains distributed. The fallback server relay is available when other paths cannot be
-used, but it is not the preferred route for every session.
+bandwidth remains distributed. Standalone server relays are available when other paths cannot be
+used, but they are not the preferred route for every session.
 
 For the security boundary behind this design, read [Security](SECURITY.md). For information about
 data visible to operators, read [Privacy](PRIVACY.md).

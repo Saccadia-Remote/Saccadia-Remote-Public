@@ -17,7 +17,7 @@ Saccadia Remote separates connection setup from session delivery:
 - the central service handles small connection messages;
 - online devices use compact connection state;
 - encrypted media prefers direct or participating relay paths;
-- the central fallback relay is used when other paths are unavailable;
+- standalone server relays are used when other paths are unavailable;
 - the server does not decode, record, or analyze session contents;
 - additional Edge servers can spread connection handling across machines.
 
@@ -37,7 +37,7 @@ The standard project is intended to provide:
 ## What free does not mean
 
 Someone still pays for computers, electricity, Internet access, domains, optional hosting,
-backups, and administration. Heavy use of a fallback server relay can also create bandwidth cost.
+backups, and administration. Heavy use of server relays can also create bandwidth cost.
 
 Free use does not promise permanent availability of a public service, guaranteed support, or
 compatibility with every network and device. The software is provided as-is.

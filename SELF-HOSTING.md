@@ -10,10 +10,12 @@ A complete installation has three roles:
 
 - **Coordinator** recognizes devices and arranges connections;
 - **Edge** holds client signalling connections and can be added to spread connection load;
-- **fallback relay** forwards encrypted session packets when other paths are unavailable.
+- **ServerRelay** forwards encrypted session packets when other paths are unavailable.
 
-These roles can run together for a small installation. Additional Edge machines can be added when
-more connection capacity or separation between locations is needed. Server roles support Linux and
+Coordinator and the first Edge can run together for a small installation. ServerRelay is installed
+from its own package on the same machine or on a separate reachable host, then allowed on the
+Coordinator by fingerprint and source IP/CIDR. Additional Edge machines can be added when more
+connection capacity or separation between locations is needed. Server roles support Linux and
 Windows.
 
 ## Server identity
@@ -38,7 +40,7 @@ behavior, and network settings are available in the
 Self-hosting gives the operator control over:
 
 - where registration metadata is stored;
-- where Edge servers and the fallback relay run;
+- where Edge servers and standalone ServerRelay instances run;
 - certificate and backup handling;
 - log retention and monitoring;
 - software update timing;
