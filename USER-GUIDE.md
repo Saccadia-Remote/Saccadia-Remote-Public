@@ -248,6 +248,7 @@ The context menu contains:
 | --- | --- |
 | **Chat** | Opens or closes the encrypted session chat panel. |
 | **Screen recording** | Opens the recording panel. This item is shown only when the host grants recording permission. |
+| **File Manager** | Opens the two-panel encrypted file manager when the host grants remote interaction/file access. This item is hidden in fullscreen mode. |
 | **Diagnostics** | Shows or hides live viewer-side playback and connection diagnostics over the remote screen. |
 | **Audio** | Enables or mutes playback of sound received from the host. A check mark means audio is enabled. |
 | **Max bitrate** | Limits the remote video stream from 1 Mbit/s up to the maximum supported by the current configuration. Unavailable values are disabled. |
@@ -279,10 +280,17 @@ responsible for consent, lawful use, storage, and sharing.
 is enabled. Avoid copying passwords or other secrets while a session is active unless the other
 participant is intended to receive them.
 
-**Files** can be transferred through supported clipboard and drag-and-drop operations when file
-permission is enabled. Wait for a transfer to finish before moving or deleting the original file.
-Transferred content is encrypted in the session, but the resulting local files have the normal
-protection of the destination computer.
+**Files** can be transferred through the session **File Manager** when remote interaction/file
+permission is enabled. The left panel shows the viewer computer and the right panel shows the host.
+Use the path boxes, Up/Refresh buttons, sortable table headers, multi-selection, filters, and the
+center copy buttons to move files or folders in either direction. Copy progress shows file and byte
+counts and can be cancelled. If an existing destination is reached, Saccadia Remote asks whether to
+overwrite, overwrite all, skip, skip all, or cancel.
+
+Windows-to-Windows sessions can also use the native file clipboard and shell drag-and-drop path.
+Linux sessions currently use text clipboard synchronization plus the explicit File Manager for file
+movement. Transferred content is encrypted in the session, but the resulting local files have the
+normal protection of the destination computer.
 
 ## Change application settings
 
