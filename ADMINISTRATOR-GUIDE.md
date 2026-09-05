@@ -6,16 +6,16 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.4.80**.
+Current package version: **0.4.84**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.80-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.80-linux-x64.tar.gz) |
-| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.80-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.80-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.80-windows-x64.zip) |
-| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.80-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.84-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.84-linux-x64.tar.gz) |
+| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.84-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.84-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.84-windows-x64.zip) |
+| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.84-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -113,7 +113,7 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.4.80-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.4.84-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
@@ -143,7 +143,7 @@ archive into its own permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote-server-relay
-sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.80-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.84-linux-x64.tar.gz \
   -C /opt/saccadia-remote-server-relay
 ```
 
