@@ -10,6 +10,11 @@ to the contents of a remote session.
 
 ## Official service and software
 
+Current package release: **0.4.92**. See [packages and checksums](packages/README.md).
+This release fixes remote input freezing while inspecting Windows context menus,
+adds targeted recovery for ordered input packets, and reduces diagnostic logging.
+It also includes Linux startup fixes to avoid duplicate GUI instances.
+
 The project's only official public Saccadia Remote server is
 [SaccadiaRemote.com](https://saccadiaremote.com). It provides the client installer configured for
 that service. If you want to use the official public server, check the address carefully and
