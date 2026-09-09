@@ -10,11 +10,11 @@ to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.96**. See [packages and checksums](packages/README.md).
-This release preserves video numbering across relay-loss recovery, handles connection
-cancellation when signalling is unavailable, and filters brief Windows cursor-hiding
-transitions. It also includes server-relay fallback selection and optional transport
-diagnostics that can be enabled without opening the GUI.
+Current package release: **0.4.97**. See [packages and checksums](packages/README.md).
+This release falls back to OpenH264 when hardware H.264 initialization fails,
+including activation errors, exceptions and timeouts. A working software encoder
+keeps the session connected, while diagnostics report the effective codec and
+the original hardware error.
 
 The project's only official public Saccadia Remote server is
 [SaccadiaRemote.com](https://saccadiaremote.com). It provides the client installer configured for
