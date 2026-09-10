@@ -52,12 +52,23 @@ this work proportional to the affected sessions rather than requiring a scan of 
 session. Old route tokens, leases, and failure cooldowns cannot be applied to the replacement
 listener merely because it has the same device ID.
 
-When one session path fails, Coordinator sends both participants one generation-safe replacement
-that names the exact obsolete allocation. Each endpoint atomically exchanges that assignment slot,
-so different local timeout ordering cannot leave one side at four old/new paths while the other side
-has only three. A repeated replacement is harmless, and a stale replacement cannot evict an
-unrelated newer path. Server relays therefore remain fallback paths instead of appearing only
-because one participant rejected a valid client-relay replacement at capacity.
+Replacements identify the exact obsolete allocation and listener generation; stale assignments
+must not evict unrelated newer paths. Client relays remain preferred. When they cannot carry a
+session, server candidates can be tried in parallel in the available pool slots (up to four).
+Bilateral confirmation is required before retiring a working fallback. The pool converges on one
+working server relay while periodically probing for a return to client relays.
+
+## Video and input recovery
+
+All original chunks of one video frame are scheduled through one relay path. This does not
+guarantee in-order UDP delivery. The viewer waits 100 ms after detecting a video gap before
+requesting repair. Repair packets are explicitly marked and do not trigger new gap detection.
+Host-side frame and generation numbering survives capture recreation within the same transport.
+The diagnostics Repair counter is measured per minute and also includes ordered-input recovery.
+
+Encoding and platform input remain endpoint responsibilities behind platform interfaces. Hardware
+H.264 initialization failures fall back to OpenH264; the effective backend is reported to the viewer.
+Game mode is a local, per-peer viewer preference, not a Coordinator setting or an extra permission.
 
 ## What is stored centrally
 

@@ -6,16 +6,16 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.4.84**.
+Current package version: **0.4.99**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.84-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.84-linux-x64.tar.gz) |
-| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.84-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.84-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.84-windows-x64.zip) |
-| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.84-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.99-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.99-linux-x64.tar.gz) |
+| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.99-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.99-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.99-windows-x64.zip) |
+| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.99-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -113,7 +113,7 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.4.84-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.4.99-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
@@ -143,7 +143,7 @@ archive into its own permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote-server-relay
-sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.84-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.99-linux-x64.tar.gz \
   -C /opt/saccadia-remote-server-relay
 ```
 
@@ -245,7 +245,7 @@ elevated local status command:
 
 ```powershell
 $status = .\Coordinator\SaccadiaRemote.ServerService.exe status
-($status | Select-String '^clusterPublicKeyPin: ').Line.Split(': ', 2)[1]
+$coordinatorPin = ($status | Select-String '^clusterPublicKeyPin: ').Line.Split(': ', 2)[1]
 ```
 
 Then install the additional Edge:
@@ -257,7 +257,7 @@ Get-ChildItem -Recurse -File | Unblock-File
   -NodeId edge-2 `
   -SignallingWebSocketUrl wss://edge2.example.com:5100/ws `
   -CoordinatorAddress https://server.example.com:7000 `
-  -CoordinatorClusterPublicKeyPin $coordinator.clusterPublicKeyPin
+  -CoordinatorClusterPublicKeyPin $coordinatorPin
 ```
 
 Read the additional Edge pins and register their exact binding on the Coordinator machine:
@@ -278,10 +278,12 @@ configuration, and restarts Coordinator. Edge reconnects automatically.
 
 ## Client installers
 
-Client MSI packages are not universal downloads in this repository. Coordinator builds them from
+Client installers are not universal downloads in this repository. Coordinator builds them from
 bundled templates for its own installation and inserts its bootstrap URL, instance ID, required
-version, and signalling TLS pin. Download the resulting Windows x64 or x86 client from the installed
-server's management page.
+version, and signalling TLS pin. Its download page provides Windows x64/x86 MSI and Linux x64
+tar.gz packages. Linux includes installation and uninstallation scripts and requires .NET 8;
+Windows requires the matching .NET 8 Desktop Runtime. Follow the runtime installation link
+shown by the installer when a dependency is missing.
 
 If Coordinator is deliberately rotated to a different public key, the package fingerprint changes
 and the next package request rebuilds the MSI with the new pin. Same-key certificate renewal does
@@ -313,7 +315,7 @@ After installation verify:
   exact endpoint; a failed LAN/loopback leg is replaced rather than silently changing route class;
 - relay-pool `failedCooldown`, session-pool `underfilled`, and pending relay deliveries return to
   zero after startup or a relay replacement;
-- the client download page can build and return both required Windows packages;
+- the client download page can return Windows x64/x86 and Linux x64 packages;
 - backups and migration restoration have been tested before relying on remote-only access.
 
 Keep a separate administration path for any machine where loss of remote access could cause harm or
