@@ -57,13 +57,25 @@ For a more detailed explanation, see [Security and Encryption](SECURITY.md),
 ## Install a client you trust
 
 The only official public Saccadia Remote service is
-[SaccadiaRemote.com](https://saccadiaremote.com). Its website provides a Windows client installer
+[SaccadiaRemote.com](https://saccadiaremote.com). Its website provides Windows and Linux client packages
 already configured for that service.
 
 1. Open the official website in your browser.
-2. Download the client installer for your Windows architecture.
+2. Download the client package for your platform: Windows x64/x86 or Linux x64.
 3. Read and accept the installer disclaimer.
 4. Allow the installation to finish and start Saccadia Remote.
+
+On Windows, run the MSI and install the matching .NET 8 Desktop Runtime if prompted.
+On Linux, extract the tar.gz package, open a terminal in the extracted directory, and run:
+
+```bash
+sudo bash ./install-linux-client.sh
+```
+
+Read the terminal notice and type `I ACCEPT` to proceed. The package also includes
+`uninstall-linux-client.sh` for removal; run it from a terminal with administrator privileges.
+Linux requires .NET 8, not the Windows Desktop Runtime. Follow the installer's dependency link
+if the required runtime is missing.
 
 A self-hosting administrator can provide a client configured for a different server. In that case,
 confirm the administrator and download source before installing it. A client from another server is
@@ -232,7 +244,7 @@ name. The current viewer's own movement is not duplicated as a host-cursor overl
 ### Use the session master button
 
 The red floating button at the edge of the remote screen is the session **master button**. It keeps
-the important viewer controls available even in fullscreen mode:
+the important viewer controls available even in fullscreen mode, except while Game mode hides it:
 
 - **Left-click** it to switch between the maximized fullscreen view and normal windowed mode.
 - **Right-click** it to open the session context menu.
@@ -248,11 +260,12 @@ The context menu contains:
 | --- | --- |
 | **Chat** | Opens or closes the encrypted session chat panel. |
 | **Screen recording** | Opens the recording panel. This item is shown only when the host grants recording permission. |
-| **File Manager** | Opens the two-panel encrypted file manager when the host grants remote interaction/file access. This item is hidden in fullscreen mode. |
 | **Diagnostics** | Shows or hides live viewer-side playback and connection diagnostics over the remote screen. |
 | **Audio** | Enables or mutes playback of sound received from the host. A check mark means audio is enabled. |
+| **Game mode** | Enables Ctrl+Alt+Shift+Z to switch fullscreen/windowed mode and permits relative mouse input when the host cursor is hidden in fullscreen. Off by default; remembered for this connection. |
 | **Max bitrate** | Limits the remote video stream from 1 Mbit/s up to the maximum supported by the current configuration. Unavailable values are disabled. |
 | **Picture quality** | Uses adaptive quality or a fixed quality from 50% to 100%. Adaptive mode reacts to current transport conditions. |
+| **Encoding** | Selects OpenH264 or Hardware H.264. Hardware uses Media Foundation on Windows and VA-API on Linux; initialization failure falls back to OpenH264. Diagnostics show the actual backend. |
 | **Screen resolution** | Keeps the host's current resolution or requests a resolution matching the viewer display. The requested mode depends on host-platform support. |
 | **Send Ctrl+Alt+Del** | Requests the secure attention sequence when the host platform and permissions allow it. |
 | **Source: real/test** | Switches between the real remote desktop and the built-in test source used for troubleshooting. Select it again to return to the other source. |
@@ -261,6 +274,21 @@ The context menu contains:
 Higher bitrate and picture quality can improve fine detail but require more network capacity. If the
 picture becomes unstable on a slow connection, try adaptive quality or a lower bitrate before
 changing unrelated system settings.
+
+### Game mode and the escape shortcut
+
+Enable **Game mode** below **Audio** in the session context menu. It is not a global Settings
+option and does not turn itself on for other connections. In fullscreen, when the host reports
+a hidden cursor, the viewer hides its local pointer and master button and sends mouse movements
+instead of screen coordinates. Press **Ctrl+Alt+Shift+Z** to return to windowed mode; press it
+again to enter fullscreen. In windowed mode the pointer and button remain available.
+
+Windows cursor handling in 0.4.99 restores the behavior before the touchscreen filters.
+Touchscreen-host cursor/button flicker may recur and remains a known issue under investigation.
+
+**Session** and **File Manager** are vertical tabs in windowed mode, not context-menu commands.
+File Manager is available only with the host's remote-interaction permission. Fullscreen hides
+the tabs and presents the remote session.
 
 ## Use chat, recording, clipboard, and files
 
@@ -322,6 +350,22 @@ woken. Leave it disabled if you do not need it. Diagnostic logging is local and 
 logs can contain connection metadata, so review them before sharing.
 
 ## Review diagnostic logs and relay health
+
+The overlay's **Repair** counter reports recovered packets per minute, including ordered-input
+recoveries; it is not a direct network-loss percentage. Missing video packets have a 100 ms
+reordering grace before the first repair request. Recovery packets do not start new gap detection.
+
+For detailed Windows host/viewer transport traces without the GUI, run from an elevated terminal:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Program Files\Saccadia Remote\Client\Set-TransportDiagnostics.ps1" -Action Enable
+```
+
+This enables logging at the next process startup; it does not restart anything. Restart the GUI
+and HostService when safe (restarting HostService interrupts incoming sessions). Use `-Action Disable`
+and restart the processes after collection. Logs are in `%ProgramData%\Saccadia Remote\logs`
+and `%LOCALAPPDATA%\Saccadia Remote\logs`. Detailed traces are limited to 100 MiB per trace file;
+collect near the first failure, from both participants, with the time of reproduction.
 
 Select **Enable diagnostic logging** in Settings and then select **Save** when you need to
 investigate a problem. A log-list button then appears below Help in the main window. Select it to

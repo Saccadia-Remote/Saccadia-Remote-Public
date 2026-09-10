@@ -18,6 +18,11 @@ Coordinator by fingerprint and source IP/CIDR. Additional Edge machines can be a
 connection capacity or separation between locations is needed. Server roles support Linux and
 Windows.
 
+Use the [current packages and checksums](packages/README.md) rather than older archive names.
+The full Server includes templates for its own Windows x64/x86 and Linux x64 client downloads;
+ServerRelay remains a separate installation. Update clients as well as server packages when
+deploying endpoint changes such as Game mode or video-repair behavior.
+
 ## Server identity
 
 Each installation uses its own persistent cryptographic identity. It can use a certificate

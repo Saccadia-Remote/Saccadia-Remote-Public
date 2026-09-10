@@ -48,6 +48,15 @@ On Windows the RelayService is configured for automatic restart after crash and 
 A fatal local listener failure is written to its Critical log before Service Control Manager restarts
 it.
 
+## How do I enable game input?
+
+In the session context menu, enable **Game mode** directly below **Audio**. It is off by default
+and saved separately for each remote computer. Ctrl+Alt+Shift+Z switches between fullscreen and
+windowed modes. In fullscreen with a hidden host cursor, the viewer hides the cursor and master
+button and sends relative mouse movement. Use the shortcut to return to windowed controls.
+Update both endpoints when testing cursor fixes. Touchscreen-specific flicker remains under
+investigation after the touchscreen filters were withdrawn in 0.4.99.
+
 ## Why does a remote host cursor sometimes have a label?
 
 When host-cursor display is allowed, physical mouse movement appears without a label. Another

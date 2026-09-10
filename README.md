@@ -10,11 +10,13 @@ to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.97**. See [packages and checksums](packages/README.md).
-This release falls back to OpenH264 when hardware H.264 initialization fails,
-including activation errors, exceptions and timeouts. A working software encoder
-keeps the session connected, while diagnostics report the effective codec and
-the original hardware error.
+Current package release: **0.4.99**. See [packages and checksums](packages/README.md).
+Game mode is now a per-connection session-menu option below Audio, off by default.
+It enables Ctrl+Alt+Shift+Z and fullscreen relative mouse input when the host cursor
+is hidden. Windows cursor handling has returned to its pre-touchscreen-filter behavior;
+touchscreen-specific symptoms remain under investigation. Video repair waits 100 ms
+before requesting missing packets. Hardware initialization failures still fall back
+to OpenH264 without disconnecting when software encoding is available.
 
 The project's only official public Saccadia Remote server is
 [SaccadiaRemote.com](https://saccadiaremote.com). It provides the client installer configured for
