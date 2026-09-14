@@ -10,7 +10,7 @@ to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.99**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.108**. See [packages and checksums](packages/README.md).
 Game mode is now a per-connection session-menu option below Audio, off by default.
 It enables Ctrl+Alt+Shift+Z and fullscreen relative mouse input when the host cursor
 is hidden. Windows cursor handling has returned to its pre-touchscreen-filter behavior;
