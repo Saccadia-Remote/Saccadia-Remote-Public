@@ -1,5 +1,14 @@
 # Frequently Asked Questions
 
+## How do I change the interface language?
+
+Open Settings, select **Language**, and save. The first launch uses and saves the system
+UI language automatically; unsupported languages use English. The client offers ten languages.
+Choose **Restart** after saving to apply the change and open the main window, or **Later**
+to defer it until the next launch. This restart affects only the GUI, not host/relay services,
+and may interrupt GUI-owned sessions. It is separate from the full restart in the tray menu.
+See [interface language](USER-GUIDE.md#interface-language).
+
 ## Can the Saccadia Remote server see my screen?
 
 No. The screen is encrypted on the host and decrypted by the viewer. The standard Coordinator,

@@ -113,7 +113,9 @@ features.
 Closing the main window normally returns Saccadia Remote to the Windows notification area instead
 of ending it. The tray menu provides **Open**, **Restart**, and **Exit**. **Restart** may request
 Windows administrator confirmation because it restarts the Saccadia host and relay services before
-opening a fresh client window. If confirmation is cancelled or a service cannot restart, the
+starting a fresh GUI, normally in the tray on Windows. Use **Open** to display its main window.
+This is different from the GUI-only restart offered after changing the language, which opens the
+main window automatically. If confirmation is cancelled or a service cannot restart, the
 original client remains open and reports the problem.
 
 Availability is refreshed periodically. A recently disconnected computer can take a short time to
@@ -333,7 +335,8 @@ The Settings window contains:
 - the maximum total bandwidth this client contributes as a relay;
 - one-time-password access;
 - Wake-on-LAN participation;
-- local diagnostic logging.
+- local diagnostic logging;
+- interface language.
 
 The screenshot shows the official public service address and its public verification pin. A pin is
 not a password or private key: the client uses it to recognize the expected server. A provisioned
@@ -348,6 +351,26 @@ quality of only one viewing session.
 Wake-on-LAN is optional and publishes the network profile needed to request that this computer be
 woken. Leave it disabled if you do not need it. Diagnostic logging is local and disabled by default;
 logs can contain connection metadata, so review them before sharing.
+
+### Interface language
+
+The client supports English, Russian, German, French, Spanish, Brazilian Portuguese,
+Italian, Turkish, Simplified Chinese, and Japanese. On first launch, it automatically
+saves the system UI language without asking you to choose. Unsupported system languages
+use English text; the saved preference is not replaced when the system language changes.
+
+To change it, select **Language** in Settings and save. A successful language change offers:
+
+- **Restart**: apply the language by restarting only the GUI, then open and activate the
+  main window. Host and relay services keep running, but active GUI-owned sessions may
+  be interrupted. This action does not request administrator elevation.
+- **Later**, or closing the prompt: keep the saved language for next launch without
+  restarting or changing the current interface language.
+
+The confirmation uses the current interface language. If saving fails, no restart is
+offered. If the replacement GUI cannot be launched, the current GUI stays running and
+shows an error. Ordinary startup, autostart and full restart from the tray retain their
+existing behavior; the automatic window opening is specific to a confirmed language restart.
 
 ## Review diagnostic logs and relay health
 

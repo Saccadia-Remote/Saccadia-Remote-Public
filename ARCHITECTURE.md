@@ -70,6 +70,15 @@ Encoding and platform input remain endpoint responsibilities behind platform int
 H.264 initialization failures fall back to OpenH264; the effective backend is reported to the viewer.
 Game mode is a local, per-peer viewer preference, not a Coordinator setting or an extra permission.
 
+## Interface language
+
+Windows and Linux share the client interface translations. Platform adapters determine the
+system UI language on first launch; a saved local preference takes precedence thereafter.
+Language changes are applied by a confirmed GUI-only restart, not live translation replacement.
+The new GUI opens its main window; ordinary and tray startup rules remain unchanged. This
+presentation setting does not change numeric protocol formatting, session encryption, user
+content, or technical diagnostic logs, and requires no translation service or network request.
+
 ## What is stored centrally
 
 The server keeps the minimum registration and connection information needed to operate the

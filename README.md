@@ -10,13 +10,12 @@ to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.110**. See [packages and checksums](packages/README.md).
-Game mode is now a per-connection session-menu option below Audio, off by default.
-It enables Ctrl+Alt+Shift+Z and fullscreen relative mouse input when the host cursor
-is hidden. Windows cursor handling has returned to its pre-touchscreen-filter behavior;
-touchscreen-specific symptoms remain under investigation. Video repair waits 100 ms
-before requesting missing packets. Hardware initialization failures still fall back
-to OpenH264 without disconnecting when software encoding is available.
+Current package release: **0.4.113**. See [packages and checksums](packages/README.md).
+The Windows/Linux client supports English, Russian, German, French, Spanish, Brazilian
+Portuguese, Italian, Turkish, Simplified Chinese, and Japanese. On first launch it saves
+the system UI language automatically. Change it in Settings; after saving, choose Restart
+to apply it now or Later to keep using the current language. This restart affects only
+the GUI and opens the main window. See [language settings](USER-GUIDE.md#interface-language).
 
 The project's only official public Saccadia Remote server is
 [SaccadiaRemote.com](https://saccadiaremote.com). It provides the client installer configured for
