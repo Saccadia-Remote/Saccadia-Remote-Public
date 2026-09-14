@@ -6,16 +6,16 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.4.99**.
+Current package version: **0.4.113**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.99-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.99-linux-x64.tar.gz) |
-| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.99-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.99-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.99-windows-x64.zip) |
-| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.99-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.113-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.113-linux-x64.tar.gz) |
+| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.113-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.113-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.113-windows-x64.zip) |
+| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.113-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -113,7 +113,7 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.4.99-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.4.113-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
@@ -143,7 +143,7 @@ archive into its own permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote-server-relay
-sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.99-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.113-linux-x64.tar.gz \
   -C /opt/saccadia-remote-server-relay
 ```
 
@@ -284,6 +284,11 @@ version, and signalling TLS pin. Its download page provides Windows x64/x86 MSI 
 tar.gz packages. Linux includes installation and uninstallation scripts and requires .NET 8;
 Windows requires the matching .NET 8 Desktop Runtime. Follow the runtime installation link
 shown by the installer when a dependency is missing.
+
+The bundled Windows/Linux clients include ten interface languages. There is no language
+selection in the installer: the GUI saves the system UI language on first launch, and users
+can change it later in Settings. The language-change restart affects only the GUI and opens
+its main window; it does not restart host or relay services. GUI-owned sessions may be interrupted.
 
 If Coordinator is deliberately rotated to a different public key, the package fingerprint changes
 and the next package request rebuilds the MSI with the new pin. Same-key certificate renewal does
