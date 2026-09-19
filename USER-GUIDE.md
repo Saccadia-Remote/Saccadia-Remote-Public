@@ -352,6 +352,14 @@ Wake-on-LAN is optional and publishes the network profile needed to request that
 woken. Leave it disabled if you do not need it. Diagnostic logging is local and disabled by default;
 logs can contain connection metadata, so review them before sharing.
 
+### Update notifications
+
+An available update does not open the main window or bring it to the foreground.
+If the window is hidden, minimized or inactive, the offer waits until you open or
+focus it. An active main window shows the offer immediately unless settings,
+diagnostic logs or another update prompt are open. Choosing **Later** or closing
+the prompt does not repeat it on every focus event. Installation requires your consent.
+
 ### Interface language
 
 The client supports English, Russian, German, French, Spanish, Brazilian Portuguese,
