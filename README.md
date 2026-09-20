@@ -10,9 +10,10 @@ to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.115**. See [packages and checksums](packages/README.md).
-This release improves channel-capacity recovery after normal delay variations;
-update the remote host to apply the fix.
+Current package release: **0.4.116**. See [packages and checksums](packages/README.md).
+This release fixes stalled channel-capacity recovery at the timing floor and adds
+bounded clock-drift compensation for long sessions while retaining congestion protection.
+Update the remote host to apply the fix.
 The Windows/Linux client supports English, Russian, German, French, Spanish, Brazilian
 Portuguese, Italian, Turkish, Simplified Chinese, and Japanese. On first launch it saves
 the system UI language automatically. Change it in Settings; after saving, choose Restart
