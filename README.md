@@ -10,7 +10,7 @@ to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.116**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.119**. See [packages and checksums](packages/README.md).
 This release fixes stalled channel-capacity recovery at the timing floor and adds
 bounded clock-drift compensation for long sessions while retaining congestion protection.
 Update the remote host to apply the fix.
