@@ -11,9 +11,12 @@ to the contents of a remote session.
 ## Official service and software
 
 Current package release: **0.4.121**. See [packages and checksums](packages/README.md).
-This release fixes stalled channel-capacity recovery at the timing floor and adds
-bounded clock-drift compensation for long sessions while retaining congestion protection.
-Update the remote host to apply the fix.
+The current viewer supports [Fit height desktop pages](USER-GUIDE.md#navigate-a-wide-desktop-with-fit-height):
+windowed navigation uses side arrow panels; fullscreen navigation uses three-physical-pixel
+edge buffers with a one-second delay and repeatable switching in both directions.
+It also supports Enter in the remote ID field, reconnecting after a stale session, and
+automatic retention of the current verified update installer. Update both clients for the
+current display metadata and fixes. See the [User Guide](USER-GUIDE.md).
 The Windows/Linux client supports English, Russian, German, French, Spanish, Brazilian
 Portuguese, Italian, Turkish, Simplified Chinese, and Japanese. On first launch it saves
 the system UI language automatically. Change it in Settings; after saving, choose Restart
