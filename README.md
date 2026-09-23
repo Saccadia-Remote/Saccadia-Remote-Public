@@ -10,7 +10,10 @@ to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.121**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.122**. See [packages and checksums](packages/README.md).
+This release adds a session Console tab and a local MCP gateway to Windows and Linux clients.
+Both require explicit permission from the remote host; MCP access is disabled by default.
+See the [User Guide](USER-GUIDE.md#use-console-and-mcp-access).
 The current viewer supports [Fit height desktop pages](USER-GUIDE.md#navigate-a-wide-desktop-with-fit-height):
 windowed navigation uses side arrow panels; fullscreen navigation uses three-physical-pixel
 edge buffers with a one-second delay and repeatable switching in both directions.
