@@ -4,7 +4,7 @@ This guide explains how Saccadia Remote works, how to prepare a computer for acc
 start and manage a remote session. It is written for people using the application rather than for
 server administrators.
 
-Reviewed for client version **0.4.124** on September 23, 2026. Menu and button names below use
+Reviewed for client version **0.4.125** on September 23, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 
 The screenshots use fictional device IDs and names. No real user, server identity, password, or
@@ -401,8 +401,8 @@ normal protection of the destination computer.
 ## Use console and MCP access
 
 The session **Console** tab starts a shell on the remote computer under its signed-in user's
-account. The host must grant **Allow remote console** permission for that session. This permission is
-off by default and can be changed in the host's default and active-session permissions.
+account. Console access follows the host's **Allow remote control, clipboard, and files**
+permission for that session. The host can change it in the default and active-session permissions.
 The tab stays available beside Session and File Manager. Type commands in the field below the
 output and press Enter. The output fills the available space; horizontal and vertical scrollbars
 appear when needed.
@@ -415,7 +415,10 @@ connection metrics, send input, transfer files, and use the console. In Settings
 MCP control**. Enable **Allow MCP connection and disconnection** separately if the
 tool needs to start or end sessions. The remote host must also grant **MCP access** for the
 session; the Robot icon identifies this permission. MCP access is off by default. Console commands
-also require remote console permission. Revoking either permission prevents further requests.
+also require remote control permission. Revoking either permission prevents further requests.
+MCP screenshots temporarily request a frame at the host desktop's full resolution, even if the
+viewer window is small. Mouse coordinates are pixels of that host desktop; use the screenshot's
+returned width and height when calling mouse tools. The usual stream size is restored afterward.
 
 The gateway is a local stdio process and uses the running client of the same signed-in user. It
 does not expose a network listener. Configure your MCP tool to run
