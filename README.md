@@ -10,7 +10,7 @@ to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.123**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.124**. See [packages and checksums](packages/README.md).
 This release includes the session Console tab and local MCP gateway for Windows and Linux clients.
 The Console tab keeps session navigation visible and provides a full-width output area with scrolling.
 Both require explicit permission from the remote host; MCP access is disabled by default.
