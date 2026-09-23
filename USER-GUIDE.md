@@ -4,7 +4,7 @@ This guide explains how Saccadia Remote works, how to prepare a computer for acc
 start and manage a remote session. It is written for people using the application rather than for
 server administrators.
 
-Reviewed for client version **0.4.121** on September 22, 2026. Menu and button names below use
+Reviewed for client version **0.4.122** on September 23, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 
 The screenshots use fictional device IDs and names. No real user, server identity, password, or
@@ -23,6 +23,7 @@ private connection information is included.
 - [Choose a screen resolution mode](#choose-a-screen-resolution-mode)
 - [Navigate a wide desktop with Fit height](#navigate-a-wide-desktop-with-fit-height)
 - [Use chat, recording, clipboard, and files](#use-chat-recording-clipboard-and-files)
+- [Use console and MCP access](#use-console-and-mcp-access)
 - [Change application settings](#change-application-settings)
 - [Understand the update package cache](#update-package-cache)
 - [Review diagnostic logs and relay health](#review-diagnostic-logs-and-relay-health)
@@ -397,6 +398,24 @@ Linux sessions currently use text clipboard synchronization plus the explicit Fi
 movement. Transferred content is encrypted in the session, but the resulting local files have the
 normal protection of the destination computer.
 
+## Use console and MCP access
+
+The session **Console** tab starts a shell on the remote computer under its signed-in user's
+account. The host must grant **Allow remote console** permission for that session. This permission is
+off by default and can be changed in the host's default and active-session permissions.
+
+The optional local MCP gateway lets an AI tool inspect authorized sessions, get screenshots and
+connection metrics, send input, transfer files, and use the console. In Settings, enable **Allow
+MCP control**. Enable **Allow MCP connection and disconnection** separately if the
+tool needs to start or end sessions. The remote host must also grant **MCP access** for the
+session; the Robot icon identifies this permission. MCP access is off by default. Console commands
+also require remote console permission. Revoking either permission prevents further requests.
+
+The gateway is a local stdio process and uses the running client of the same signed-in user. It
+does not expose a network listener. Configure your MCP tool to run
+`C:\Program Files\Saccadia Remote\Client\McpGateway\SaccadiaRemote.McpGateway.exe` on Windows or
+`~/SaccadiaRemote/McpGateway/SaccadiaRemote.McpGateway` on Linux.
+
 ## Change application settings
 
 ![Saccadia Remote settings](assets/user-guide/settings.png)
@@ -411,6 +430,7 @@ The Settings window contains:
 - one-time-password access;
 - Wake-on-LAN participation;
 - local diagnostic logging;
+- MCP control and a separate switch for MCP session connection/disconnection;
 - interface language.
 
 The screenshot shows the official public service address and its public verification pin. A pin is
