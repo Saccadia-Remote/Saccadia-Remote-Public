@@ -4,7 +4,7 @@ This guide explains how Saccadia Remote works, how to prepare a computer for acc
 start and manage a remote session. It is written for people using the application rather than for
 server administrators.
 
-Reviewed for client version **0.4.123** on September 23, 2026. Menu and button names below use
+Reviewed for client version **0.4.124** on September 23, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 
 The screenshots use fictional device IDs and names. No real user, server identity, password, or
@@ -406,6 +406,9 @@ off by default and can be changed in the host's default and active-session permi
 The tab stays available beside Session and File Manager. Type commands in the field below the
 output and press Enter. The output fills the available space; horizontal and vertical scrollbars
 appear when needed.
+The refresh button restarts the shell. The eraser clears the displayed output while leaving the
+shell running. The circled X closes the shell and clears the output and command field; command
+input becomes available again after restarting the shell. Hover over a button for its description.
 
 The optional local MCP gateway lets an AI tool inspect authorized sessions, get screenshots and
 connection metrics, send input, transfer files, and use the console. In Settings, enable **Allow
