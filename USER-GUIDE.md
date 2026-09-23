@@ -4,7 +4,7 @@ This guide explains how Saccadia Remote works, how to prepare a computer for acc
 start and manage a remote session. It is written for people using the application rather than for
 server administrators.
 
-Reviewed for client version **0.4.122** on September 23, 2026. Menu and button names below use
+Reviewed for client version **0.4.123** on September 23, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 
 The screenshots use fictional device IDs and names. No real user, server identity, password, or
@@ -403,6 +403,9 @@ normal protection of the destination computer.
 The session **Console** tab starts a shell on the remote computer under its signed-in user's
 account. The host must grant **Allow remote console** permission for that session. This permission is
 off by default and can be changed in the host's default and active-session permissions.
+The tab stays available beside Session and File Manager. Type commands in the field below the
+output and press Enter. The output fills the available space; horizontal and vertical scrollbars
+appear when needed.
 
 The optional local MCP gateway lets an AI tool inspect authorized sessions, get screenshots and
 connection metrics, send input, transfer files, and use the console. In Settings, enable **Allow
