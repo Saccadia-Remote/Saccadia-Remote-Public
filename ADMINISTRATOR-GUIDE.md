@@ -19,6 +19,12 @@ Current package version: **0.4.125**.
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
+The optional [MCP gateway](https://github.com/Saccadia-Remote/Saccadia-Remote-Public/blob/master/MCP.md)
+belongs to the installed Windows/Linux
+**client**, not these Server, Edge, or ServerRelay packages. It runs locally on
+the viewer through stdio and requires separate permissions on the viewer and host.
+There is no MCP port to expose on Coordinator or Edge.
+
 ## Installation consent
 
 Every package includes `DISCLAIMER.md`. Installation is blocked until the administrator explicitly

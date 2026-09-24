@@ -424,6 +424,8 @@ The gateway is a local stdio process and uses the running client of the same sig
 does not expose a network listener. Configure your MCP tool to run
 `C:\Program Files\Saccadia Remote\Client\McpGateway\SaccadiaRemote.McpGateway.exe` on Windows or
 `~/SaccadiaRemote/McpGateway/SaccadiaRemote.McpGateway` on Linux.
+For setup examples, the permission matrix, all MCP tools, and troubleshooting, see the
+[MCP integration guide](MCP.md).
 
 ## Change application settings
 
