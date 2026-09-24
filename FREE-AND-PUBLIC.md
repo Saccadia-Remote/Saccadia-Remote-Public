@@ -1,7 +1,9 @@
 # Why Saccadia Remote Can Be Free
 
-Saccadia Remote is intended to be usable without a subscription, paid account, advertising
-profile, or sale of session data.
+Saccadia Remote is free to use for personal, professional, and commercial purposes. The standard
+software does not require a subscription, paid account, advertising profile, or sale of session
+data. This applies to the client and to the supplied software for running your own server; there
+is no per-device fee.
 
 The project is private-source. This public repository explains the product, its architecture,
 privacy boundary, and self-hosting model; it does not publish the application source code or grant
@@ -27,11 +29,10 @@ operating cost and the amount of private data exposed to infrastructure.
 
 ## What free means
 
-The standard project is intended to provide:
+The standard project provides:
 
-- client use without a subscription;
-- self-hosting without a per-device server fee;
-- no paid account requirement for basic operation;
+- free client and self-hosted server use for personal, professional, and commercial purposes;
+- no subscription, paid account, or per-device fee for use of the standard software;
 - no advertising or session-content monetization requirement.
 
 ## What free does not mean

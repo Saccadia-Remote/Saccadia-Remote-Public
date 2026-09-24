@@ -5,8 +5,9 @@
 # Saccadia Remote
 
 Saccadia Remote is a free remote desktop application for connecting to a computer from another
-location. It is designed so that the servers which help devices find each other do not need access
-to the contents of a remote session.
+location. Personal, professional, and commercial use of the standard software is free of charge;
+there is no paid-use tier or per-device fee. It is designed so that the servers which help devices
+find each other do not need access to the contents of a remote session.
 
 ## Official service and software
 
@@ -76,9 +77,9 @@ central infrastructure mainly handles small connection messages, while encrypted
 uses direct or distributed relay paths whenever possible. This greatly reduces the server capacity
 and bandwidth needed for idle users and ordinary sessions.
 
-Free use does not mean that hosting, Internet access, electricity, or administration have no cost.
-It means that the standard project does not require a subscription, advertising profile, or sale
-of session data.
+Free use applies to personal, professional, and commercial scenarios. It does not mean that
+hosting, Internet access, electricity, or administration have no cost. The standard project does
+not require a subscription, advertising profile, or sale of session data.
 
 ## Run your own server
 

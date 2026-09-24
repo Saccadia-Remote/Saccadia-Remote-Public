@@ -116,9 +116,10 @@ source-code modification or redistribution rights.
 
 ## Is the software really free?
 
-The standard project is intended to be available without a subscription or paid account. Users and
-self-hosting operators still pay their own hardware, Internet, electricity, domain, hosting, and
-administration costs.
+Yes. Personal, professional, and commercial use of the standard client and self-hosted server
+software is free of charge. There is no subscription, paid account, or per-device fee for that use.
+Users and self-hosting operators still pay their own hardware, Internet, electricity, domain,
+hosting, and administration costs. Free use does not grant source-code or redistribution rights.
 
 ## Does encryption make remote access completely safe?
 
