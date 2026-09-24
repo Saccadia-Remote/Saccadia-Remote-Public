@@ -14,7 +14,8 @@ Current package release: **0.4.125**. See [packages and checksums](packages/READ
 This release includes the session Console tab and local MCP gateway for Windows and Linux clients.
 The Console tab keeps session navigation visible and provides a full-width output area with scrolling.
 Both require explicit permission from the remote host; MCP access is disabled by default.
-See the [User Guide](USER-GUIDE.md#use-console-and-mcp-access).
+See the [MCP integration guide](MCP.md) for setup, host/viewer permissions, tools,
+and examples; the [User Guide](USER-GUIDE.md#use-console-and-mcp-access) covers the Console tab.
 The current viewer supports [Fit height desktop pages](USER-GUIDE.md#navigate-a-wide-desktop-with-fit-height):
 windowed navigation uses side arrow panels; fullscreen navigation uses three-physical-pixel
 edge buffers with a one-second delay and repeatable switching in both directions.
@@ -106,6 +107,7 @@ service level. See [Disclaimer](DISCLAIMER.md).
 ## Documentation
 
 - [User guide](USER-GUIDE.md)
+- [MCP integration and permissions](MCP.md)
 - [How the system works](ARCHITECTURE.md)
 - [Security and encryption](SECURITY.md)
 - [Privacy](PRIVACY.md)

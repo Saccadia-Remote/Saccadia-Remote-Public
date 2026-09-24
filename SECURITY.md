@@ -84,6 +84,15 @@ End-to-end encryption does not protect against:
 Use trusted installation packages, keep devices updated, and grant only the permissions required
 for a session.
 
+## AI-assisted access through MCP
+
+The optional client-side MCP gateway uses the normal encrypted Saccadia session.
+It does not grant access through the server or bypass host authentication. A viewer
+must enable local MCP control, and the host must explicitly grant **MCP access**
+for the active session. Mouse, keyboard, files, and terminal also require the
+host's remote-control permission. MCP permission is denied by default on the
+host. See the [MCP integration guide](MCP.md) for the full permission matrix.
+
 ## Diagnostics and vulnerability reports
 
 Diagnostic logging is disabled by default. When enabled, logs may contain device identifiers, IP
