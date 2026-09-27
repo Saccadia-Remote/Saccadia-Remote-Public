@@ -1,13 +1,13 @@
 # Saccadia Remote server packages
 
-Version **0.4.133**
+Version **0.4.134**
 
-- [Linux x64 full Server](SaccadiaRemote-Server-0.4.133-linux-x64.tar.gz)
-- [Linux x64 Edge](SaccadiaRemote-Edge-0.4.133-linux-x64.tar.gz)
-- [Windows x64 full Server](SaccadiaRemote-Server-0.4.133-windows-x64.zip)
-- [Windows x64 Edge](SaccadiaRemote-Edge-0.4.133-windows-x64.zip)
-- [Linux x64 ServerRelay](SaccadiaRemote-ServerRelay-0.4.133-linux-x64.tar.gz)
-- [Windows x64 ServerRelay](SaccadiaRemote-ServerRelay-0.4.133-windows-x64.zip)
+- [Linux x64 full Server](SaccadiaRemote-Server-0.4.134-linux-x64.tar.gz)
+- [Linux x64 Edge](SaccadiaRemote-Edge-0.4.134-linux-x64.tar.gz)
+- [Windows x64 full Server](SaccadiaRemote-Server-0.4.134-windows-x64.zip)
+- [Windows x64 Edge](SaccadiaRemote-Edge-0.4.134-windows-x64.zip)
+- [Linux x64 ServerRelay](SaccadiaRemote-ServerRelay-0.4.134-linux-x64.tar.gz)
+- [Windows x64 ServerRelay](SaccadiaRemote-ServerRelay-0.4.134-windows-x64.zip)
 - [SHA-256 checksums](SHA256SUMS)
 
 Read the [administrator installation guide](../ADMINISTRATOR-GUIDE.md) and
