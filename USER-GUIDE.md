@@ -73,6 +73,9 @@ already configured for that service.
 4. Allow the installation to finish and start Saccadia Remote.
 
 On Windows, run the MSI and install the matching .NET 8 Desktop Runtime if prompted.
+The Download button downloads Microsoft's Desktop Runtime installer for the MSI's
+x64 or x86 architecture directly. Install it, then run the Saccadia MSI again.
+The plain .NET Runtime and the .NET 10 SDK do not replace .NET 8 Desktop Runtime.
 On Linux, extract the tar.gz package, open a terminal in the extracted directory, and run:
 
 ```bash
