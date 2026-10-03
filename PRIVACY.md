@@ -43,6 +43,18 @@ feature removes that stored profile.
 
 Leave Wake-on-LAN disabled if this convenience is not required.
 
+## Host privacy curtain
+
+Private Mode requires the host's permission and covers physical Windows monitors with
+an opaque curtain while allowing the remote session to continue. It is excluded from
+remote screen capture. Since 0.4.151, taskbar previews and Aero Peek do not uncover it.
+The installed host service provides the required window privileges; the runtime verifies
+them before reporting the curtain as active. Linux currently does not support this feature.
+
+The curtain is a software window, not a guarantee against someone with physical or
+administrator access. Terminating its runtime or switching to a secure desktop can expose
+the screen. Check the reported privacy status and use the feature only on a host you trust.
+
 ## Diagnostics
 
 Diagnostic logging is local and disabled by default. If a user or administrator enables it, logs

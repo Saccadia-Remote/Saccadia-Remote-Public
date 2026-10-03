@@ -4,7 +4,7 @@ This guide explains how Saccadia Remote works, how to prepare a computer for acc
 start and manage a remote session. It is written for people using the application rather than for
 server administrators.
 
-Reviewed for client version **0.4.134** on September 27, 2026. Menu and button names below use
+Updated for client version **0.4.151** on October 3, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 
 The screenshots use fictional device IDs and names. No real user, server identity, password, or
@@ -22,6 +22,7 @@ private connection information is included.
 - [Control an active remote session](#control-an-active-remote-session)
 - [Choose a screen resolution mode](#choose-a-screen-resolution-mode)
 - [Navigate a wide desktop with Fit height](#navigate-a-wide-desktop-with-fit-height)
+- [Private Mode on the host](#private-mode-on-the-host)
 - [Use chat, recording, clipboard, and files](#use-chat-recording-clipboard-and-files)
 - [Use console and MCP access](#use-console-and-mcp-access)
 - [Change application settings](#change-application-settings)
@@ -375,6 +376,20 @@ On Windows touchscreen hosts, cursor/button flicker remains a known issue under 
 **Session** and **File Manager** are vertical tabs in windowed mode, not context-menu commands.
 File Manager is available only with the host's remote-interaction permission. Fullscreen hides
 the tabs and presents the remote session.
+
+### Private Mode on the host
+
+On Windows 10 version 2004 or later, the host can enable **Allow private connections**
+in Settings. The viewer can then select **Private Mode**, immediately after Game mode
+in the session menu. It covers the host's physical monitors while remote control continues.
+The curtain remains while at least one connected session requests privacy, and is removed
+when the last such session ends or turns Private Mode off.
+
+Version 0.4.151 keeps the curtain above taskbar previews and prevents Aero Peek from hiding it.
+Install the updated Windows client package on the host, including HostService. Privacy status
+in session diagnostics must report **Active** before relying on the curtain. A host runtime
+without the required window privileges reports an error instead of claiming privacy is active.
+This feature is unavailable on Linux. See [privacy limitations](PRIVACY.md#host-privacy-curtain).
 
 ## Use chat, recording, clipboard, and files
 
