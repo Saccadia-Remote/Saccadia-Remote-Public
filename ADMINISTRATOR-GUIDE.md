@@ -6,16 +6,16 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.4.142**.
+Current package version: **0.4.150**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.142-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.142-linux-x64.tar.gz) |
-| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.142-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.142-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.142-windows-x64.zip) |
-| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.142-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.150-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.150-linux-x64.tar.gz) |
+| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.150-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.150-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.150-windows-x64.zip) |
+| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.150-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -119,7 +119,7 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.4.142-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.4.150-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
@@ -149,7 +149,7 @@ archive into its own permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote-server-relay
-sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.142-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.150-linux-x64.tar.gz \
   -C /opt/saccadia-remote-server-relay
 ```
 
@@ -303,6 +303,12 @@ not rebuild it because client trust has not changed.
 The client MSI displays the as-is disclaimer and requires acceptance in normal interactive setup.
 An unattended installation must explicitly set `SACCADIA_ACCEPT_DISCLAIMER=1`; otherwise Windows
 Installer stops before making changes.
+
+The Windows client MSI automatically adds Microsoft Defender process exclusions for the exact
+installed Client, HostService, and RelayService executable paths. It preserves existing exclusions
+and removes only entries it created during uninstallation. These exclusions reduce Defender
+inspection for the three processes; folders and system-wide protection settings are unchanged.
+If Defender or a managed policy rejects the change, installation continues and records it in the MSI log.
 
 ## Certificates, renewal, and migration
 

@@ -76,6 +76,11 @@ On Windows, run the MSI and install the matching .NET 8 Desktop Runtime if promp
 The Download button downloads Microsoft's Desktop Runtime installer for the MSI's
 x64 or x86 architecture directly. Install it, then run the Saccadia MSI again.
 The plain .NET Runtime and the .NET 10 SDK do not replace .NET 8 Desktop Runtime.
+The Windows installer adds Microsoft Defender process exclusions for the installed client,
+HostService, and RelayService executables. Existing exclusions are preserved; uninstallation
+removes only entries created by the installer. This reduces Defender inspection for those
+processes. A policy refusal is recorded in the installer log and does not block installation.
+
 On Linux, extract the tar.gz package, open a terminal in the extracted directory, and run:
 
 ```bash
