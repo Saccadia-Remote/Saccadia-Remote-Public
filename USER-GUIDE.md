@@ -4,7 +4,7 @@ This guide explains how Saccadia Remote works, how to prepare a computer for acc
 start and manage a remote session. It is written for people using the application rather than for
 server administrators.
 
-Updated for client version **0.4.151** on October 3, 2026. Menu and button names below use
+Updated for client version **0.4.152** on October 4, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 
 The screenshots use fictional device IDs and names. No real user, server identity, password, or
@@ -449,6 +449,11 @@ does not expose a network listener. Configure your MCP tool to run
 `~/SaccadiaRemote/McpGateway/SaccadiaRemote.McpGateway` on Linux.
 For setup examples, the permission matrix, all MCP tools, and troubleshooting, see the
 [MCP integration guide](MCP.md).
+From 0.4.152, the gateway supplies brief instructions and a `get_usage_guide` tool
+with the [AI skill](skills/saccadia-remote/SKILL.md). It explains that the AI can
+connect to the intended PC, inspect screenshots, click visible controls and operate
+software installers within the authorized task. Reading the guide needs no remote
+session and does not change the permissions required for remote actions.
 
 ## Change application settings
 

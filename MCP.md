@@ -54,6 +54,27 @@ switch, but not the remote viewer's MCP permission. A host may restrict or revok
 either host permission at any time; review the effective rights of the active
 incoming session, not only its defaults.
 
+## AI usage skill
+
+Starting with **0.4.152**, the gateway supplies brief instructions during MCP
+initialization and exposes `get_usage_guide` with the complete
+[saccadia-remote skill](skills/saccadia-remote/SKILL.md). This tool works without
+a running Saccadia GUI or a remote session; all remote operations retain their
+existing permission checks.
+
+The guide explains how the AI can connect to the intended PC itself, inspect a
+remote screenshot, click buttons and menus at PNG pixel coordinates, and operate
+installers/uninstallers within the user's authorized task. It also covers terminal
+and file workflows, screenshot dimensions, result verification, and permissions.
+Call `get_usage_guide` before the first remote task. Receiving instructions does
+not grant access or authorize unrelated changes; the AI client controls when it
+loads instructions.
+
+The same canonical text is embedded in the gateway and shipped at
+`McpGateway/skills/saccadia-remote/SKILL.md`. For an AI client that supports local
+skills, copy the `saccadia-remote` directory into that client's skills directory.
+Simply placing the file beside the executable does not install it into an AI client.
+
 ## Configure an MCP client
 
 Point the AI application's **local stdio MCP server** configuration at the gateway
@@ -107,6 +128,7 @@ shell within a session and is returned by `open_terminal`.
 
 | Task | MCP tools | Important inputs or behavior |
 |---|---|---|
+| Learn the workflow | `get_usage_guide` | Complete AI skill; independent of GUI, connection and host permissions. |
 | Discover sessions | `list_sessions`, `list_recent_sessions`, `list_incoming_sessions` | Active outgoing sessions with MCP access; recent outgoing history without saved credentials; active incoming sessions with host-side permissions. |
 | Manage connections | `connect_session`, `get_connection_status`, `cancel_connection`, `disconnect_session`, `disconnect_incoming_session` | Connect by 12-digit `deviceId`; disconnect by the appropriate `sessionId`. Requires the separate local management switch. |
 | Inspect a host | `get_session_info`, `get_connection_metrics`, `get_session_screenshot` | Client and desktop details, permissions, relay/connection diagnostics, or a PNG desktop image. |
@@ -114,7 +136,8 @@ shell within a session and is returned by `open_terminal`.
 | Work with files | `list_remote_files`, `upload_files`, `download_files` | Browse a remote path; upload local viewer files to a remote directory; download remote files to a local viewer directory. |
 | Use a shell | `open_terminal`, `read_terminal`, `write_terminal`, `resize_terminal`, `close_terminal` | A persistent remote shell with its own `terminalId`; columns/rows are character dimensions. |
 
-All 24 tools require **Allow MCP control** on the local viewer. Tools using an
+The 24 remote/client tools require **Allow MCP control** on the local viewer.
+`get_usage_guide` only returns bundled documentation. Tools using an
 open outgoing session also require the host's MCP permission. The last three rows
 need the host's remote-control permission. Session-management tools have the
 additional local switch described above.
