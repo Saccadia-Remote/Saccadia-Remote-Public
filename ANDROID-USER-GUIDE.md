@@ -5,7 +5,7 @@ The Android client is a viewer: it does not accept incoming remote sessions or r
 a local relay. You can have one outgoing connection at a time, including a connection
 that is still waiting for authorization.
 
-This guide covers Android client version **0.4.154**, updated on October 5, 2026.
+This guide covers Android client version **0.4.159**, updated on October 5, 2026.
 It requires Android 8 or later and an ARM64 device.
 Button names below use the English interface. The same controls are available in
 the other supported languages.
@@ -16,6 +16,7 @@ the other supported languages.
 - [Update from your server](#update-from-your-server)
 - [Understand the main screen](#understand-the-main-screen)
 - [Connect to a computer](#connect-to-a-computer)
+- [Keep a session in the background](#keep-a-session-in-the-background)
 - [Manage saved devices](#manage-saved-devices)
 - [Control the remote screen](#control-the-remote-screen)
 - [Scroll on the remote computer](#scroll-on-the-remote-computer)
@@ -112,6 +113,23 @@ clipboard, audio, private-mode, or MCP access.
 Use **Cancel** on the main screen to stop a pending connection. While a session is
 connected, **Open session** returns to its image. Close the existing connection before
 starting another one.
+
+## Keep a session in the background
+
+Press Home or switch to another application without disconnecting. Saccadia keeps
+the outgoing session, including a request waiting for host authorization, in an
+Android foreground service. Allow notifications when Android asks so the session
+notification can show **Return to session** and **Disconnect**. Notification denial
+does not itself end the session.
+
+Return through the notification or the app icon to continue the same connection.
+MCP continues to work in the background, including current screenshots of the remote
+computer at its original resolution, terminal operations and file transfers. The
+video source belongs to the session and continues receiving frames while its display
+is hidden. Returning restores the image without a new authorization request.
+A hidden session does not keep the phone screen on.
+Disconnecting stops the service and removes its notification. Force-stopping the
+app or terminating its process ends the connection; it is not automatically recreated.
 
 ## Manage saved devices
 
