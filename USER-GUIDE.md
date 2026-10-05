@@ -4,6 +4,9 @@ This guide explains how Saccadia Remote works, how to prepare a computer for acc
 start and manage a remote session. It is written for people using the application rather than for
 server administrators.
 
+For the phone's viewer interface, gestures, keyboard, settings, and logs, use the
+[Android user guide](ANDROID-USER-GUIDE.md).
+
 Updated for client version **0.4.152** on October 4, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 

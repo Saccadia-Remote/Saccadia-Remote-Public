@@ -286,8 +286,8 @@ configuration, and restarts Coordinator. Edge reconnects automatically.
 
 Client installers are not universal downloads in this repository. Coordinator builds them from
 bundled templates for its own installation and inserts its bootstrap URL, instance ID, required
-version, and signalling TLS pin. Its download page provides Windows x64/x86 MSI and Linux x64
-tar.gz packages. Linux includes installation and uninstallation scripts and requires .NET 8;
+version, and signalling TLS pin. Its download page provides Windows x64/x86 MSI, Linux x64
+tar.gz, and Android ARM64 APK packages. Linux includes installation and uninstallation scripts and requires .NET 8;
 Windows requires the matching .NET 8 Desktop Runtime. Follow the runtime installation link
 shown by the installer when a dependency is missing.
 
@@ -309,6 +309,46 @@ installed Client, HostService, and RelayService executable paths. It preserves e
 and removes only entries it created during uninstallation. These exclusions reduce Defender
 inspection for the three processes; folders and system-wide protection settings are unchanged.
 If Defender or a managed policy rejects the change, installation continues and records it in the MSI log.
+
+### Android packaging and updates
+
+Android packaging requires server version **0.4.153** or later. Older server
+distributions do not include the Android template or APK builder.
+
+The server distribution includes an `android-arm64` APK template and `package.json`
+under `client-templates`, using the same catalog as Windows and Linux. Coordinator
+replaces the APK’s public first-run settings with this installation’s bootstrap URL,
+instance ID, and signalling public-key PIN, then signs and caches the final package.
+The APK requires Android 8 or later. See the [Android user guide](ANDROID-USER-GUIDE.md).
+
+Each server keeps a persistent Android signing identity in
+`data/android-signing/signing.p12` and its password in `data/android-signing/password`,
+relative to the configured server storage root. The identity is generated when the
+first Android package is prepared. Both files are private, belong to the server
+service account, and must be retained together during backup and migration. Never
+include them in public distributions. Replacing this identity prevents existing
+Android installations from accepting ordinary updates. It is separate from TLS
+certificates so TLS renewal does not change the APK signature.
+
+The Linux Coordinator image includes the required JRE, `keytool`, `apksigner`, and
+`zipalign`. On a Windows Coordinator, install a JDK and Android SDK Build Tools,
+and configure these service environment variables if the tools are not on PATH:
+`SACCADIA_JAVA_PATH` (java.exe), `SACCADIA_KEYTOOL_PATH` (keytool.exe),
+`SACCADIA_APKSIGNER_PATH` (Build Tools’ lib/apksigner.jar), and
+`SACCADIA_ZIPALIGN_PATH` (zipalign.exe). Restart Coordinator after configuring them.
+The server does not need the .NET Android workload to personalize an existing template.
+
+Release publishing builds the template with .NET SDK 10 and its Android workload,
+Android SDK 36, and JDK 21. Select that SDK with `-AndroidDotNet` in the release/deploy
+scripts or the `SACCADIA_ANDROID_DOTNET` environment variable. The portable server
+and desktop projects keep their existing .NET 8 targets. No APK signing keys are
+needed on the build machine: signing happens on the deployed server.
+
+Android update checks use `/api/client-packages/android/arm64`, the existing controlled
+download queue, and the package SHA-256. The app verifies the file and its signing
+identity before asking Android to install it. The user confirms installation through
+Android’s system UI. Updating server templates uses the normal deployment process;
+restart Coordinator so its catalog loads the new manifest.
 
 ## Certificates, renewal, and migration
 
@@ -332,7 +372,7 @@ After installation verify:
   exact endpoint; a failed LAN/loopback leg is replaced rather than silently changing route class;
 - relay-pool `failedCooldown`, session-pool `underfilled`, and pending relay deliveries return to
   zero after startup or a relay replacement;
-- the client download page can return Windows x64/x86 and Linux x64 packages;
+- the client download page can return Windows x64/x86, Linux x64, and Android ARM64 packages;
 - backups and migration restoration have been tested before relying on remote-only access.
 
 Keep a separate administration path for any machine where loss of remote access could cause harm or

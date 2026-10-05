@@ -33,6 +33,8 @@ Portuguese, Italian, Turkish, Simplified Chinese, and Japanese. On first launch 
 the system UI language automatically. Change it in Settings; after saving, choose Restart
 to apply it now or Later to keep using the current language. This restart affects only
 the GUI and opens the main window. See [language settings](USER-GUIDE.md#interface-language).
+The Android viewer supports the same ten languages; its saved choice is applied
+immediately. See the [Android user guide](ANDROID-USER-GUIDE.md).
 
 The project's only official public Saccadia Remote server is
 [SaccadiaRemote.com](https://saccadiaremote.com). It provides the client installer configured for
@@ -113,6 +115,7 @@ service level. See [Disclaimer](DISCLAIMER.md).
 ## Documentation
 
 - [User guide](USER-GUIDE.md)
+- [Android user guide](ANDROID-USER-GUIDE.md)
 - [MCP integration and permissions](MCP.md)
 - [How the system works](ARCHITECTURE.md)
 - [Security and encryption](SECURITY.md)
