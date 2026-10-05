@@ -11,7 +11,7 @@ find each other do not need access to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.152**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.159**. See [packages and checksums](packages/README.md).
 This release adds MCP initialization instructions and a connection-independent
 `get_usage_guide` tool with the [AI usage skill](skills/saccadia-remote/SKILL.md),
 covering connections, screenshot-based desktop control and authorized software tasks.
