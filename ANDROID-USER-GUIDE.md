@@ -5,7 +5,9 @@ The Android client is a viewer: it does not accept incoming remote sessions or r
 a local relay. You can have one outgoing connection at a time, including a connection
 that is still waiting for authorization.
 
-This guide covers Android client version **0.4.159**, updated on October 5, 2026.
+This guide covers Android client version **0.4.160**, updated on October 7, 2026.
+
+The bundled Android template is revision **3** (Android versionCode **4016003**).
 It requires Android 8 or later and an ARM64 device.
 Button names below use the English interface. The same controls are available in
 the other supported languages.
@@ -171,6 +173,23 @@ You can zoom and move the view even when the remote picture is not changing.
 Adding a second finger, cancelling a gesture, rotating the phone, or putting the app
 in the background releases a held mouse button.
 
+### Touchpad mode
+
+Tap the touchpad icon at the left end of the shortcut strip in portrait, or at
+the bottom of that strip in landscape. A blue background means the mode is on.
+The choice is saved separately for each remote computer, including between
+sessions and after restarting the app.
+
+| Gesture in touchpad mode | Result |
+| --- | --- |
+| Move one finger | Move the cursor relative to its current position, without dragging |
+| Tap once | Left click at the cursor |
+| Press and hold | Right click at the cursor |
+| Tap, then quickly press again and move or hold | Drag with the left mouse button held |
+| Pinch or move two fingers | Zoom or move the local view, as in direct mode |
+
+Switch the mode off to return to direct pointing on the remote image.
+
 ## Scroll on the remote computer
 
 The control strip is below the image in portrait orientation and to its right in
@@ -195,13 +214,16 @@ the host must allow clipboard synchronization. Use Android's Back control to hid
 the keyboard when finished.
 
 The shortcut strip is above the image in portrait and to its left in landscape.
-It provides **Esc**, **Enter**, **Alt+Tab**, **Ctrl+C**, **Ctrl+V**, and **Ctrl+Z**.
-These act in the focused application on the remote computer. Ctrl+C and Ctrl+V send
+It provides **Esc**, **Enter**, **Alt+Tab**, **Ctrl+C**, paste, and **Ctrl+Z**.
+Paste is **Ctrl+V** on Windows and **Alt+Ctrl+V** on Linux; Android keyboard text
+entry uses the same platform-specific paste chord. These act in the focused
+application on the remote computer. Copy and paste shortcuts send
 the key combination; they do not by themselves copy text between the phone and host.
 
 The button in the corner of this strip opens other keys: **F1–F12**, navigation
-keys, and additional combinations. Linux alternatives include **Super+Tab** for
-GNOME and **Ctrl+Shift+C / Ctrl+Shift+V** for terminal copy and paste. The exact
+keys, and additional combinations. Windows shows **Win / Win+Tab**; Linux shows
+**Super / Super+Tab**, **Ctrl+Shift+C / Ctrl+Shift+V** for terminal copy and paste,
+and ordinary **Ctrl+V** for applications that use it. The exact
 meaning depends on the remote desktop and application. In a Linux terminal,
 Ctrl+Z normally suspends a process rather than undoing an edit.
 
