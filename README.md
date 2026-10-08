@@ -11,7 +11,11 @@ find each other do not need access to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.160**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.161**. See [packages and checksums](packages/README.md).
+
+Desktop recent connections support nested groups, drag-and-drop, online/total counters, and
+selective encrypted import/export. Android supports flat exchange and a two-column landscape main
+screen. See the [user guide](USER-GUIDE.md#manage-recent-connections).
 
 The Android viewer includes platform-specific shortcuts and a touchpad mode
 saved separately for each remote computer. See the

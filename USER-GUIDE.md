@@ -7,7 +7,7 @@ server administrators.
 For the phone's viewer interface, gestures, keyboard, settings, and logs, use the
 [Android user guide](ANDROID-USER-GUIDE.md).
 
-Updated for client version **0.4.152** on October 4, 2026. Menu and button names below use
+Updated for client version **0.4.161** on October 8, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 
 The screenshots use fictional device IDs and names. No real user, server identity, password, or
@@ -213,9 +213,9 @@ If a connection attempt is still pending, use **Cancel** before trying again.
 Recent connections are stored locally for convenience. The application retains up to 30 entries,
 placing favorites first and then the most recently used computers.
 
-Tiles are the default. Select the list button in the **Recent connections** tab header to switch to
-compact rows; select it again to return to tiles. This choice is remembered after the application
-restarts.
+List view is the default for new installations. The button in the **Recent connections** tab header
+switches between the tree list and tiles. The choice is remembered; upgrading preserves your existing
+choice. Tiles ignore groups and keep the usual favorite/date ordering.
 
 ![Recent connections displayed as compact rows](assets/user-guide/recent-connections-list.png)
 
@@ -232,6 +232,54 @@ Each tile and row provides the same information and actions:
 Selecting an action button performs only that action; it does not start a connection. Removing a
 history entry does not uninstall Saccadia Remote, change the remote computer, or revoke saved
 authorization; use the key action separately when you also want to remove that credential.
+
+### Organize the tree with groups
+
+The toolbar on the left contains **Add group**, **Export connections**, and **Import connections**.
+Create a group, enter its name, and press Enter. Names and device aliases support Unicode, including
+Cyrillic. The pencil renames a group using the same inline editor as a connection.
+
+Click anywhere in a group's header to expand or collapse it, except on an action button or drag grip.
+The folder icon indicates its state; that state is remembered after restart. Children appear inside
+the group's frame. The counter before its name is **online/total connections** in the entire subtree;
+folders are not counted and an unknown status is not treated as online.
+
+Drag the dotted grip before the star to move a connection. Drag a group's grip to move its entire
+subtree. The top or bottom of a group header inserts a sibling before or after that group; the middle
+places the item inside it. Drop into the free catalog area to move to the root. A blue separator marks
+the resulting insertion position. A group cannot be moved into itself or one of its descendants.
+
+Groups come before connections at each level, and their order is set manually by dragging.
+Connections keep their automatic order within each level: favorites first, then other devices;
+each category is sorted by most recent connection. Dragging changes their group, not this sorting.
+
+Removing a group asks for confirmation. The group and its nested groups are removed, while all their
+connections return to the root with their aliases, favorites, and dates preserved. Canceling keeps
+the tree unchanged.
+
+### Export and import recent connections
+
+1. Select **Export connections** and check the groups or connections to include. Checking a group
+   selects its descendants; a partly selected group shows an intermediate checkbox state.
+2. Select **Copy export string**. The string contains selected groups, their order, required parent
+   groups, device names and aliases, favorite flags, and last connection dates.
+3. On the receiving client, select **Import connections**, paste the string, and select **Preview**.
+4. Check the items to import and select **Import**. Statuses are queried immediately after import.
+
+The field wraps long strings and scrolls vertically; visual wrapping does not change the copied data.
+The format starts with `SACCADIA-CONNECTIONS:1:` and contains encrypted data with an integrity check.
+Ordinary accidental editing is detected before import. The shared built-in key can be extracted from
+the application: this is not a trusted-sender signature or protection against someone who knows the
+key. Receive exports only from people you trust.
+
+Passwords and saved authorization are not exported. Import merges connections by device ID:
+imported aliases, favorite flags, and group membership replace those local values, the latest
+connection date is retained, and local authorization and viewer options remain. Imported groups get
+new local IDs. Import that would exceed the 30-device limit is rejected without removing existing
+entries. Invalid or modified strings are rejected before changes are applied.
+
+Android imports only a flat device list and exports devices as if all were at the root. Desktop group
+structure is therefore not retained through an Android export.
 
 ## Approve an incoming connection
 

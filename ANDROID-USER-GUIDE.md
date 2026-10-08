@@ -5,9 +5,9 @@ The Android client is a viewer: it does not accept incoming remote sessions or r
 a local relay. You can have one outgoing connection at a time, including a connection
 that is still waiting for authorization.
 
-This guide covers Android client version **0.4.160**, updated on October 7, 2026.
+This guide covers Android client version **0.4.161**, updated on October 8, 2026.
 
-The bundled Android template is revision **3** (Android versionCode **4016003**).
+The bundled Android template is revision **0** (Android versionCode **4016100**).
 It requires Android 8 or later and an ARM64 device.
 Button names below use the English interface. The same controls are available in
 the other supported languages.
@@ -152,6 +152,27 @@ Open the menu at the right of a row to manage it:
 
 A red key before the menu means that saved authorization exists. It is an indicator;
 use the row menu to delete authorization.
+
+### Import and export saved devices
+
+The **Devices** header has import and export buttons aligned to the right. Export opens a checkbox
+selection of devices; **Copy export string** copies the selected devices, names and aliases,
+favorites, and last connection dates. Android exports a flat list with every device at the root.
+
+For import, paste an export string, select **Preview**, select the devices, and select **Import**.
+Desktop groups are ignored: selected connections are added to the flat list. Existing IDs are merged,
+using imported names/aliases and favorites and the latest connection date; local authorization and
+viewer settings stay. Import is rejected if it would exceed the 30-device limit. Availability is
+queried immediately after successful import.
+
+The text field wraps and scrolls only vertically; wrapping does not change clipboard data.
+Exports do not contain passwords or saved authorization. The encrypted string's integrity check
+rejects accidental editing, but its built-in shared key can be extracted; it does not authenticate the
+sender. Import only data from people you trust. See the [desktop exchange guide](USER-GUIDE.md#export-and-import-recent-connections)
+for format and compatibility details.
+
+In landscape, status, your ID, connection controls, and pending connection information are on the
+left, while **Devices** is on the right. The two columns scroll independently.
 
 ## Control the remote screen
 
