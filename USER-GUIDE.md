@@ -7,7 +7,7 @@ server administrators.
 For the phone's viewer interface, gestures, keyboard, settings, and logs, use the
 [Android user guide](ANDROID-USER-GUIDE.md).
 
-Updated for client version **0.4.161** on October 8, 2026. Menu and button names below use
+Updated for client version **0.4.163** on October 8, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 
 The screenshots use fictional device IDs and names. No real user, server identity, password, or
@@ -599,8 +599,13 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Program Files\Saccad
 
 This enables logging at the next process startup; it does not restart anything. Restart the GUI
 and HostService when safe (restarting HostService interrupts incoming sessions). Use `-Action Disable`
-and restart the processes after collection. Logs are in `%ProgramData%\Saccadia Remote\logs`
-and `%LOCALAPPDATA%\Saccadia Remote\logs`. Detailed traces are limited to 100 MiB per trace file;
+and restart the processes after collection. Logs are in `%ProgramData%\SaccadiaRemote\logs`
+and `%LOCALAPPDATA%\Saccadia Remote\logs`. Machine logs, recordings, and diagnostic settings now share
+`%ProgramData%\SaccadiaRemote`. The Windows installer prepares permissions before starting
+the services and merges the old `Saccadia Remote` directory after successful installation.
+Conflicting files are preserved under separate names; inaccessible files remain in the old directory.
+
+Detailed traces are limited to 100 MiB per trace file;
 collect near the first failure, from both participants, with the time of reproduction.
 
 Select **Enable diagnostic logging** in Settings and then select **Save** when you need to

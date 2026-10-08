@@ -5,7 +5,7 @@ The Android client is a viewer: it does not accept incoming remote sessions or r
 a local relay. You can have one outgoing connection at a time, including a connection
 that is still waiting for authorization.
 
-This guide covers Android client version **0.4.161**, updated on October 8, 2026.
+This guide covers Android client version **0.4.163**, updated on October 8, 2026.
 
 The bundled Android template is revision **0** (Android versionCode **4016100**).
 It requires Android 8 or later and an ARM64 device.
@@ -172,7 +172,11 @@ sender. Import only data from people you trust. See the [desktop exchange guide]
 for format and compatibility details.
 
 In landscape, status, your ID, connection controls, and pending connection information are on the
-left, while **Devices** is on the right. The two columns scroll independently.
+left, while **Devices** is on the right. In both orientations, recent devices scroll
+inside their own container. The **Devices** heading and import/export buttons remain
+visible. The scrollbar reserves space at the right of the list instead of covering
+device rows. In portrait, the connection form is above the list; when the keyboard
+reduces the available height, the form can scroll separately.
 
 ## Control the remote screen
 
