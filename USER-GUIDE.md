@@ -7,7 +7,7 @@ server administrators.
 For the phone's viewer interface, gestures, keyboard, settings, and logs, use the
 [Android user guide](ANDROID-USER-GUIDE.md).
 
-Updated for client version **0.4.163** on October 8, 2026. Menu and button names below use
+Updated for client version **0.4.164** on October 9, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 
 The screenshots use fictional device IDs and names. No real user, server identity, password, or
@@ -299,6 +299,11 @@ session. Removing saved authorization prevents that viewer from using the previo
 again, but it does not replace the host's permanent password.
 
 ## Control an active remote session
+
+On Windows hosts, cursor telemetry follows the active input desktop, including the
+lock/sign-in screen, and resets cached cursor state when the desktop changes. Remote
+control must be allowed. With an Android viewer, update both endpoints to 0.4.164 or
+later for direct PIN/password text entry; see the [Android keyboard guide](ANDROID-USER-GUIDE.md#use-the-keyboard-and-shortcuts).
 
 ![Active Saccadia Remote viewer session](assets/user-guide/remote-session.png)
 

@@ -5,9 +5,9 @@ The Android client is a viewer: it does not accept incoming remote sessions or r
 a local relay. You can have one outgoing connection at a time, including a connection
 that is still waiting for authorization.
 
-This guide covers Android client version **0.4.163**, updated on October 8, 2026.
+This guide covers Android client version **0.4.164**, updated on October 9, 2026.
 
-The bundled Android template is revision **0** (Android versionCode **4016100**).
+The bundled Android template is revision **0** (Android versionCode **4016400**).
 It requires Android 8 or later and an ARM64 device.
 Button names below use the English interface. The same controls are available in
 the other supported languages.
@@ -234,14 +234,22 @@ pointer into the remote window that should receive scrolling.
 
 The keyboard button is opposite the session-menu button on the control strip:
 on the right in portrait, and at the bottom in landscape. Tap it to open Android's
-on-screen keyboard. Text entry uses the encrypted clipboard channel and paste, so
-the host must allow clipboard synchronization. Use Android's Back control to hide
-the keyboard when finished.
+on-screen keyboard. With an updated Windows host, text is sent as Unicode keyboard
+input over the encrypted input channel, including on the Windows lock/sign-in screen.
+The host must allow remote control; this text entry does not use clipboard synchronization
+or place typed credentials in either endpoint's clipboard. Update both Android and the
+Windows host to **0.4.164 or later**; older hosts reject the new input event.
+On Linux, text still uses the encrypted clipboard channel and paste, so clipboard
+synchronization must be allowed. Use Android's Back control to hide the keyboard.
+
+Text, Backspace, Enter, and shortcuts are sent in order. Tap the PIN/password field
+before typing and use Enter to submit. Windows host cursor telemetry follows the active
+input desktop when switching between the normal desktop and the lock/sign-in screen.
 
 The shortcut strip is above the image in portrait and to its left in landscape.
 It provides **Esc**, **Enter**, **Alt+Tab**, **Ctrl+C**, paste, and **Ctrl+Z**.
-Paste is **Ctrl+V** on Windows and **Alt+Ctrl+V** on Linux; Android keyboard text
-entry uses the same platform-specific paste chord. These act in the focused
+Paste is **Ctrl+V** on Windows and **Alt+Ctrl+V** on Linux. Android keyboard text
+entry uses that paste path only on Linux; Windows uses direct Unicode input. Shortcuts act in the focused
 application on the remote computer. Copy and paste shortcuts send
 the key combination; they do not by themselves copy text between the phone and host.
 

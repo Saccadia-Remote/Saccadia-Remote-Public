@@ -11,7 +11,12 @@ find each other do not need access to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.163**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.164**. See [packages and checksums](packages/README.md).
+
+This release adds direct Android text input for updated Windows hosts, including the
+lock/sign-in screen, and fixes host cursor telemetry across Windows desktop switches.
+Update both endpoints; see the [Android keyboard guide](ANDROID-USER-GUIDE.md#use-the-keyboard-and-shortcuts).
+
 
 Desktop recent connections support nested groups, drag-and-drop, online/total counters, and
 selective encrypted import/export. Android supports flat exchange and a two-column landscape main
