@@ -7,7 +7,7 @@ server administrators.
 For the phone's viewer interface, gestures, keyboard, settings, and logs, use the
 [Android user guide](ANDROID-USER-GUIDE.md).
 
-Updated for client version **0.4.164** on October 9, 2026. Menu and button names below use
+Updated for client version **0.4.165** on October 11, 2026. Menu and button names below use
 the English interface; the same controls are available in the other supported languages.
 
 The screenshots use fictional device IDs and names. No real user, server identity, password, or
