@@ -11,12 +11,11 @@ find each other do not need access to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.165**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.166**. See [packages and checksums](packages/README.md).
 
-This release improves UDP connection establishment on mobile networks, preserves
-server-relay allocations across registration heartbeats, and fixes relay rate recovery
-after congestion. The Android session menu shows how each connected relay is reached;
-see [session options](ANDROID-USER-GUIDE.md#change-session-options).
+This release makes direct Android builds and published updates use the same JIT
+runtime and rejects APKs with leftover AOT modules. It fixes the AndroidX dependency
+mismatch that could terminate the app while opening the update installer.
 
 
 Desktop recent connections support nested groups, drag-and-drop, online/total counters, and

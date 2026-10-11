@@ -5,9 +5,9 @@ The Android client is a viewer: it does not accept incoming remote sessions or r
 a local relay. You can have one outgoing connection at a time, including a connection
 that is still waiting for authorization.
 
-This guide covers Android client version **0.4.165**, updated on October 11, 2026.
+This guide covers Android client version **0.4.166**, updated on October 11, 2026.
 
-The bundled Android template is revision **0** (Android versionCode **4016500**).
+The bundled Android template is revision **0** (Android versionCode **4016600**).
 It requires Android 8 or later and an ARM64 device.
 Button names below use the English interface. The same controls are available in
 the other supported languages.
@@ -238,7 +238,7 @@ on-screen keyboard. With an updated Windows host, text is sent as Unicode keyboa
 input over the encrypted input channel, including on the Windows lock/sign-in screen.
 The host must allow remote control; this text entry does not use clipboard synchronization
 or place typed credentials in either endpoint's clipboard. Update both Android and the
-Windows host to **0.4.165 or later**; older hosts reject the new input event.
+Windows host to **0.4.164 or later**; older hosts reject the new input event.
 On Linux, text still uses the encrypted clipboard channel and paste, so clipboard
 synchronization must be allowed. Use Android's Back control to hide the keyboard.
 
