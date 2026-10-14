@@ -5,9 +5,9 @@ The Android client is a viewer: it does not accept incoming remote sessions or r
 a local relay. You can have one outgoing connection at a time, including a connection
 that is still waiting for authorization.
 
-This guide covers Android client version **0.4.166**, updated on October 11, 2026.
+This guide covers Android client version **0.4.170**, updated on October 14, 2026.
 
-The bundled Android template is revision **0** (Android versionCode **4016600**).
+The bundled Android template is revision **0** (Android versionCode **4017000**).
 It requires Android 8 or later and an ARM64 device.
 Button names below use the English interface. The same controls are available in
 the other supported languages.
@@ -44,16 +44,29 @@ manager, review the source before allowing it. Open Saccadia Remote after instal
 The initial server configuration is applied on first launch; later installations over
 the same app preserve your saved settings.
 
-Install compatible newer APKs over the existing application. Do not uninstall it to
-perform an ordinary update: uninstalling removes this installation's identity,
-settings, device history, and saved authorization. Android accepts updates signed
-for the installed application; packages signed by a different server may be incompatible.
+Install compatible newer APKs over the existing application for ordinary updates.
+Each server has a stable package name derived from its installation identity and a
+persistent signing key; the official Google Play edition is a separate application.
+Android updates require the same package name and signing identity.
+
+On supported Android devices, uninstalling shows an option to keep application data.
+If you select it, reinstalling the same package signed with the same identity can
+restore your device ID, settings, saved connections and authorization. This was
+verified on Android 16. Availability and behavior depend on the Android implementation.
+Without keeping data, uninstalling removes the local profile; a different package
+name does not automatically receive the old profile. Already deleted data cannot
+be restored by enabling this option later.
 
 To prepare the computer that you want to control, follow
 [Prepare a computer for incoming access](USER-GUIDE.md#prepare-a-computer-for-incoming-access)
 in the desktop guide.
 
 ## Update from your server
+
+The official Google Play edition receives updates through Google Play; its
+**Check for updates** button opens its store listing. The following server update
+flow applies to server-distributed APKs. Missing or different package names in
+update metadata are rejected before an update is offered or queued for download.
 
 The app checks for an update through the connected server’s authenticated update
 endpoint. When a newer version is available, it offers **Update** or **Later** on the
@@ -367,3 +380,11 @@ still apply to individual actions.
 
 For host setup and permission details, use the [desktop user guide](USER-GUIDE.md).
 For server installation, use the [administrator guide](ADMINISTRATOR-GUIDE.md).
+
+## Privacy policy
+
+Open **Settings → Privacy policy** to read the public policy of your selected server.
+It describes the standard data processing and the operator's contact information.
+No management login is required. Independent server operators control their own
+registration data, logs, backups and policy. A browser warning about a self-signed
+certificate is not bypassed by the application.

@@ -6,16 +6,16 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.4.166**.
+Current package version: **0.4.170**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.166-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.166-linux-x64.tar.gz) |
-| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.166-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.166-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.166-windows-x64.zip) |
-| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.166-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.170-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.170-linux-x64.tar.gz) |
+| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.170-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.170-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.170-windows-x64.zip) |
+| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.170-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -119,7 +119,7 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.4.166-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.4.170-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
@@ -149,7 +149,7 @@ archive into its own permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote-server-relay
-sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.166-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.170-linux-x64.tar.gz \
   -C /opt/saccadia-remote-server-relay
 ```
 
@@ -321,6 +321,15 @@ replaces the APK’s public first-run settings with this installation’s bootst
 instance ID, and signalling public-key PIN, then signs and caches the final package.
 The APK requires Android 8 or later. See the [Android user guide](ANDROID-USER-GUIDE.md).
 
+Since 0.4.167, every server, including the official service, uses an Android
+package name derived from its persistent ServerInstanceId:
+`com.saccadia.remote.s` followed by the first 32 lowercase hexadecimal characters
+of SHA-256 over the UTF-8 instance ID. Preserve both ServerInstanceId and the APK
+signing identity during migration. Different servers' APKs can coexist. The separate
+official Google Play edition uses `com.saccadia.remote` and updates through Google Play.
+Starting with 0.4.168, update metadata includes `androidPackageName`; an Android client
+hides and refuses updates when that field is absent or differs from its installed name.
+
 Each server keeps a persistent Android signing identity in
 `data/android-signing/signing.p12` and its password in `data/android-signing/password`,
 relative to the configured server storage root. The identity is generated when the
@@ -377,3 +386,25 @@ After installation verify:
 
 Keep a separate administration path for any machine where loss of remote access could cause harm or
 expense.
+
+## Public privacy policy
+
+Each Coordinator serves `/privacy` without signing in, on its management HTTPS
+listener and its bootstrap HTTPS listener. Client settings open the connected
+server's authenticated management origin; before connection they use the selected
+bootstrap HTTPS origin. The browser validates the certificate normally. A public
+store listing should use the management URL with a publicly trusted certificate.
+
+The standard `wwwroot/privacy-template.html` is anonymous and contains no operator
+personal data. To publish your own contact, create UTF-8 `data/privacy-contact.txt`
+under the persistent Coordinator storage root. On the standard Linux deployment
+the host path is `/var/lib/saccadia-remote/server/data/privacy-contact.txt`; make it
+readable by UID 1654. Windows uses the configured persistent server storage root.
+The contact is HTML-encoded and read on every request, so no restart is necessary.
+
+If your processing or retention practices differ, publish your full standalone
+UTF-8 HTML policy as `data/privacy.html`. The optional `{{OPERATOR_CONTACT}}` token
+is replaced with the contact paragraph. This page disallows scripts, external
+resources and forms. These operator files survive updates; keep them out of generic
+distribution archives. The operator is responsible for an accurate policy,
+contact channel and actual data-retention and deletion procedures.

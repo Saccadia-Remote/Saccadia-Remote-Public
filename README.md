@@ -11,11 +11,14 @@ find each other do not need access to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.166**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.170**. See [packages and checksums](packages/README.md).
 
-This release makes direct Android builds and published updates use the same JIT
-runtime and rejects APKs with leftover AOT modules. It fixes the AndroidX dependency
-mismatch that could terminate the app while opening the update installer.
+This release gives each server its own stable Android package name, separates
+server APK updates from Google Play updates, and filters incompatible update offers.
+On supported Android devices, the system's keep-data option can preserve the profile
+when reinstalling the same package with the same signing identity. Each Coordinator
+also provides a public `/privacy` page linked from client settings; the bundled policy
+template contains no operator personal data.
 
 
 Desktop recent connections support nested groups, drag-and-drop, online/total counters, and
