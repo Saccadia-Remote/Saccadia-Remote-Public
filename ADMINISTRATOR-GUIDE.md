@@ -56,6 +56,27 @@ host/network firewalls as applicable.
 Only management 5443 is intended for a browser. Port 5000 is client bootstrap, 7000 is cluster mTLS,
 and long-lived client WebSockets terminate directly on Edge.
 
+## Network map
+
+Open the protected `/status` page and press **Map** to show approximate IP-based
+locations of users, client relays, server relays, the Coordinator and Edge nodes.
+Online nodes are green, inactive nodes grey; marker shapes distinguish node types.
+The button is grey and disabled when the local GeoIP database is unavailable.
+Nodes without real coordinates are counted separately and are not placed on the map.
+
+The panel captures data only when you press Map. It has no zoom, pan, marker
+actions or automatic refresh; press Map again for a new capture. Ordinary status
+polling does not change an open map. The map background is bundled locally and
+does not contact an external mapping service.
+
+Captures and images are not stored. Only the last real location of each known
+node (type, ID, name, city, country and coordinates) is retained in
+`data/network-map.db` under the Coordinator's persistent storage directory so
+disconnected nodes can appear grey. IP addresses, connection secrets and online
+state are not stored in this database. Online state comes from live registries;
+synthetic relay-selection coordinates are excluded. The API `/api/status/map`
+requires the same administrator session as the detailed status page.
+
 ## Protect the detailed status page
 
 The overview page and its aggregate `/api/overview` data remain public. The detailed `/status` page

@@ -13,6 +13,12 @@ find each other do not need access to the contents of a remote session.
 
 Current package release: **0.4.172**. See [packages and checksums](packages/README.md).
 
+The Server packages include a static network map on the protected status page.
+Press **Map** to capture current user, relay and server locations: online nodes
+are green, inactive nodes grey. The button is disabled without a usable local
+GeoIP database. Captures are not stored or refreshed automatically.
+See [Network map](ADMINISTRATOR-GUIDE.md#network-map).
+
 This release adds Android ID recovery through Google Play services Block Store.
 After successful authentication, the app retains its signing identity for a later
 reinstallation on the same device, user profile, package and signing identity.
