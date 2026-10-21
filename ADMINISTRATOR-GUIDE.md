@@ -6,16 +6,16 @@ installation scripts, configuration templates, and third-party notices.
 
 ## Downloads
 
-Current package version: **0.4.171**.
+Current package version: **0.4.172**.
 
 | Role | Operating system | Package |
 |---|---|---|
-| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.171-linux-x64.tar.gz) |
-| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.171-linux-x64.tar.gz) |
-| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.171-linux-x64.tar.gz) |
-| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.171-windows-x64.zip) |
-| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.171-windows-x64.zip) |
-| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.171-windows-x64.zip) |
+| Server full node | Linux x64 | [Download](packages/SaccadiaRemote-Server-0.4.172-linux-x64.tar.gz) |
+| Edge only | Linux x64 | [Download](packages/SaccadiaRemote-Edge-0.4.172-linux-x64.tar.gz) |
+| ServerRelay only | Linux x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.172-linux-x64.tar.gz) |
+| Server full node | Windows x64 | [Download](packages/SaccadiaRemote-Server-0.4.172-windows-x64.zip) |
+| Edge only | Windows x64 | [Download](packages/SaccadiaRemote-Edge-0.4.172-windows-x64.zip) |
+| ServerRelay only | Windows x64 | [Download](packages/SaccadiaRemote-ServerRelay-0.4.172-windows-x64.zip) |
 
 Verify a downloaded archive against [SHA256SUMS](packages/SHA256SUMS) before extracting it.
 
@@ -119,7 +119,7 @@ the server archive into a permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote
-sudo tar -xzf SaccadiaRemote-Server-0.4.171-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-Server-0.4.172-linux-x64.tar.gz \
   -C /opt/saccadia-remote
 ```
 
@@ -149,7 +149,7 @@ archive into its own permanent directory:
 
 ```bash
 sudo install -d -m 0750 /opt/saccadia-remote-server-relay
-sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.171-linux-x64.tar.gz \
+sudo tar -xzf SaccadiaRemote-ServerRelay-0.4.172-linux-x64.tar.gz \
   -C /opt/saccadia-remote-server-relay
 ```
 
@@ -358,6 +358,16 @@ download queue, and the package SHA-256. The app verifies the file and its signi
 identity before asking Android to install it. The user confirms installation through
 Android’s system UI. Updating server templates uses the normal deployment process;
 restart Coordinator so its catalog loads the new manifest.
+
+From 0.4.172, Android clients with Google Play services retain a minimal ID recovery
+credential through Block Store after successful authentication. The signing key
+is recovered before registration and is never uploaded to Coordinator. The numeric
+ID is scoped to its server; other servers can recognize the same recovered public
+key through ordinary authentication. The bundled privacy policy describes this
+processing; operators using a custom policy should update their disclosure.
+Recovery after full uninstall was tested with Android backup disabled on one phone;
+device and Play services compatibility still applies. This does not back up recent
+connections, passwords or other settings.
 
 ## Certificates, renewal, and migration
 

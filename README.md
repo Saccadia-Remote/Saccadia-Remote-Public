@@ -11,9 +11,16 @@ find each other do not need access to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.171**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.172**. See [packages and checksums](packages/README.md).
 
-This release adds Android Light, Dark, and System themes, with Dark as the default.
+This release adds Android ID recovery through Google Play services Block Store.
+After successful authentication, the app retains its signing identity for a later
+reinstallation on the same device, user profile, package and signing identity.
+Full uninstall/reinstall recovery was verified with Android backup disabled on the
+test phone. Availability depends on the device and Play services implementation;
+connection history and settings are not included. See [ID recovery](ANDROID-USER-GUIDE.md#install-and-keep-your-data).
+
+Android offers Light, Dark, and System themes, with Dark as the default.
 Theme changes preview immediately, including dropdown lists. Leaving changed settings
 offers to save them or discard all edits and restore the previous theme.
 

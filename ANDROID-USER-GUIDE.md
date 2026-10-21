@@ -5,9 +5,9 @@ The Android client is a viewer: it does not accept incoming remote sessions or r
 a local relay. You can have one outgoing connection at a time, including a connection
 that is still waiting for authorization.
 
-This guide covers Android client version **0.4.171**, updated on October 21, 2026.
+This guide covers Android client version **0.4.172**, updated on October 21, 2026.
 
-The bundled Android template is revision **0** (Android versionCode **4017100**).
+The bundled Android template is revision **0** (Android versionCode **4017200**).
 It requires Android 8 or later and an ARM64 device.
 Button names below use the English interface. The same controls are available in
 the other supported languages.
@@ -53,9 +53,22 @@ On supported Android devices, uninstalling shows an option to keep application d
 If you select it, reinstalling the same package signed with the same identity can
 restore your device ID, settings, saved connections and authorization. This was
 verified on Android 16. Availability and behavior depend on the Android implementation.
-Without keeping data, uninstalling removes the local profile; a different package
-name does not automatically receive the old profile. Already deleted data cannot
-be restored by enabling this option later.
+Uninstall dialogs provided by a launcher or phone vendor may omit the keep-data
+option. From version 0.4.172, devices with Google Play services also save a small
+ID recovery credential through Block Store after successful server authentication.
+On the same phone, Android user profile, package and signing identity, the app can
+restore its signing key before registration and prove ownership of the previous ID.
+The ID is restored only in the appropriate server namespace; the server can also
+recognize the recovered signing key when no numeric ID hint is available.
+
+This mechanism was verified after a full uninstall and reinstall with Android's
+backup setting disabled on the test phone. Availability still depends on the device
+and Google Play services implementation. **Settings** shows the recovery-copy status.
+The app does not enable cloud upload of this credential. Connection history,
+passwords and other settings are not included; keeping the complete local profile
+still requires Android's keep-data option. A different package or signing identity
+does not automatically receive the old profile. Data deleted before a recovery
+credential was saved cannot be recovered by installing this version later.
 
 To prepare the computer that you want to control, follow
 [Prepare a computer for incoming access](USER-GUIDE.md#prepare-a-computer-for-incoming-access)
@@ -324,6 +337,9 @@ Leaving unchanged settings does not show this confirmation.
   Android's appearance. Themes do not change the remote computer's image.
 - **Diagnostic logs** enables writing application logs and adds the Logs button to
   the main screen.
+- The ID recovery status reports whether the signing identity was saved through
+  Google Play services. A temporary save error is retried; this copy contains the
+  ID and signing key, not your saved connections or other settings.
 - **Application updates** provides manual checking, download progress, installation,
   and cancellation. See [Update from your server](#update-from-your-server).
 - **MCP access** allows an authorized local MCP client to control the session.
