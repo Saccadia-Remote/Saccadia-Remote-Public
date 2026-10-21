@@ -11,10 +11,14 @@ find each other do not need access to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.170**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.171**. See [packages and checksums](packages/README.md).
 
-This release gives each server its own stable Android package name, separates
-server APK updates from Google Play updates, and filters incompatible update offers.
+This release adds Android Light, Dark, and System themes, with Dark as the default.
+Theme changes preview immediately, including dropdown lists. Leaving changed settings
+offers to save them or discard all edits and restore the previous theme.
+
+Each server has its own stable Android package name. Server APK updates are separate
+from Google Play updates, and incompatible update offers are filtered.
 On supported Android devices, the system's keep-data option can preserve the profile
 when reinstalling the same package with the same signing identity. Each Coordinator
 also provides a public `/privacy` page linked from client settings; the bundled policy

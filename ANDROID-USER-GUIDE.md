@@ -5,9 +5,9 @@ The Android client is a viewer: it does not accept incoming remote sessions or r
 a local relay. You can have one outgoing connection at a time, including a connection
 that is still waiting for authorization.
 
-This guide covers Android client version **0.4.170**, updated on October 14, 2026.
+This guide covers Android client version **0.4.171**, updated on October 21, 2026.
 
-The bundled Android template is revision **0** (Android versionCode **4017000**).
+The bundled Android template is revision **0** (Android versionCode **4017100**).
 It requires Android 8 or later and an ARM64 device.
 Button names below use the English interface. The same controls are available in
 the other supported languages.
@@ -308,6 +308,9 @@ screen timeout applies again.
 ## Change application settings
 
 Open **Settings** on the main screen, change the values you need, and select **Save**.
+If you leave using the toolbar arrow or Android Back after making changes, choose
+**Save** to keep them or **Don't save** to discard them and return to the main screen.
+Leaving unchanged settings does not show this confirmation.
 
 - **Server URL** selects the server used for connections. Changing it reconnects
   signalling. Devices on independent servers do not share a device directory.
@@ -315,6 +318,10 @@ Open **Settings** on the main screen, change the values you need, and select **S
   self-signed certificate. Obtain the correct public-key PIN from its administrator.
 - **Language** offers the system language or English, Russian, German, French,
   Spanish, Brazilian Portuguese, Italian, Turkish, Simplified Chinese, and Japanese.
+- **Theme** offers **Dark** (the default), **Light**, and **System**. Selection
+  previews the appearance immediately, including menus and dropdown lists.
+  Save to keep it; **Don't save** restores the previous theme. System follows
+  Android's appearance. Themes do not change the remote computer's image.
 - **Diagnostic logs** enables writing application logs and adds the Logs button to
   the main screen.
 - **Application updates** provides manual checking, download progress, installation,
