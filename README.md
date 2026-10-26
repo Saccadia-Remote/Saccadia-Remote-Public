@@ -11,7 +11,11 @@ find each other do not need access to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.172**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.173**. See [packages and checksums](packages/README.md).
+
+This release improves Android LAN route publication, relay selection and bandwidth
+re-evaluation, and video pacing and budget recovery. The UDP payload limit remains
+1200 bytes. Remaining Wi-Fi freezes are still under investigation.
 
 The Server packages include a static network map on the protected status page.
 Press **Map** to capture current user, relay and server locations: online nodes
