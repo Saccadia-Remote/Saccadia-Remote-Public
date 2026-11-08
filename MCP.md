@@ -19,7 +19,7 @@ commands and results between viewer and host.
    the features in 0.4.125; older clients may not understand these permissions.
 2. Start and keep the Saccadia GUI open on the viewer under the same OS account
    that runs the AI application. The gateway needs that GUI's live sessions.
-3. In viewer **Settings**, enable **Allow MCP control** and save. This switch is
+3. In viewer **Settings → MCP Server**, enable **Allow MCP control** and save. This switch is
    off by default.
 4. If the AI application must connect, cancel attempts, or disconnect sessions,
    also enable **Allow MCP connection and disconnection**. This separate switch
@@ -32,6 +32,10 @@ commands and results between viewer and host.
    grant **Allow remote control, clipboard, and files** for that session.
    Terminal access follows this control permission; there is no separate console
    permission switch. The host can revoke permissions during the session.
+7. To share the Windows or Linux host's accessibility tree with incoming
+   sessions that have MCP access, enable **Share UI tree with incoming MCP
+   sessions** under **MCP Host** on the remote computer. This option defaults to
+   off. Local gateway settings are under **MCP Server**.
 
 Normal Saccadia authentication or host approval still applies to a new connection.
 Knowing a device ID, starting the MCP gateway, or enabling the local viewer switch
@@ -44,6 +48,7 @@ does not authorize access to a host by itself.
 | List recent outgoing connections and incoming sessions | Yes | No | No | No |
 | Connect, check/cancel a connection attempt, disconnect an outgoing or incoming session | Yes | Yes | See note below | No |
 | List active outgoing sessions, read session info or metrics, capture desktop | Yes | No | Yes | No |
+| Read the foreground window UI tree (requires the host-wide UI tree option) | Yes | No | Yes | No |
 | Keyboard/mouse input, remote files, transfers, remote terminal | Yes | No | Yes | Yes |
 
 For a new connection, normal host authentication and approval happen first. An
@@ -132,15 +137,16 @@ shell within a session and is returned by `open_terminal`.
 | Discover sessions | `list_sessions`, `list_recent_sessions`, `list_incoming_sessions` | Active outgoing sessions with MCP access; recent outgoing history without saved credentials; active incoming sessions with host-side permissions. |
 | Manage connections | `connect_session`, `get_connection_status`, `cancel_connection`, `disconnect_session`, `disconnect_incoming_session` | Connect by 12-digit `deviceId`; disconnect by the appropriate `sessionId`. Requires the separate local management switch. |
 | Inspect a host | `get_session_info`, `get_connection_metrics`, `get_session_screenshot` | Client and desktop details, permissions, relay/connection diagnostics, or a PNG desktop image. |
+| Inspect accessible controls | `get_session_ui_tree` | The active window's tree, with roles, names, enabled/focused state, available input values and optional bounds. |
 | Control desktop | `move_mouse`, `scroll_mouse`, `mouse_button`, `click`, `send_key_combo` | Mouse coordinates are host desktop pixels; keyboard combinations include forms such as `Ctrl+S`. |
 | Work with files | `list_remote_files`, `upload_files`, `download_files` | Browse a remote path; upload local viewer files to a remote directory; download remote files to a local viewer directory. |
 | Use a shell | `open_terminal`, `read_terminal`, `write_terminal`, `resize_terminal`, `close_terminal` | A persistent remote shell with its own `terminalId`; columns/rows are character dimensions. |
 
-The 24 remote/client tools require **Allow MCP control** on the local viewer.
+The remote/client tools require **Allow MCP control** on the local viewer.
 `get_usage_guide` only returns bundled documentation. Tools using an
-open outgoing session also require the host's MCP permission. The last three rows
-need the host's remote-control permission. Session-management tools have the
-additional local switch described above.
+open outgoing session also require the host's MCP permission. Desktop input,
+file operations, and terminal access need remote-control permission.
+Session-management tools have the additional local switch described above.
 
 ### Connection and session IDs
 
@@ -153,6 +159,11 @@ to an attempt in progress. `disconnect_incoming_session` uses an ID from
 `list_incoming_sessions`; do not substitute an outgoing session ID.
 
 ### Screenshots and pointer coordinates
+
+`get_session_ui_tree` returns a `status` and, on success, a `root` node with
+nested children. `truncated` marks a partial tree. Bounds use the response's
+`coordinateSpace`. On Wayland, available bounds are relative to the active
+window. Use the PNG to locate mouse click coordinates.
 
 `get_session_screenshot` returns a PNG image and its width and height. It
 temporarily asks for a video frame at the **host desktop's resolution**, even

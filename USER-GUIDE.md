@@ -28,6 +28,7 @@ private connection information is included.
 - [Private Mode on the host](#private-mode-on-the-host)
 - [Use chat, recording, clipboard, and files](#use-chat-recording-clipboard-and-files)
 - [Use console and MCP access](#use-console-and-mcp-access)
+- [Read the active window's UI tree](#read-the-active-windows-ui-tree)
 - [Change application settings](#change-application-settings)
 - [Understand the update package cache](#update-package-cache)
 - [Review diagnostic logs and relay health](#review-diagnostic-logs-and-relay-health)
@@ -490,9 +491,9 @@ shell running. The circled X closes the shell and clears the output and command 
 input becomes available again after restarting the shell. Hover over a button for its description.
 
 The optional local MCP gateway lets an AI tool inspect authorized sessions, get screenshots and
-connection metrics, send input, transfer files, and use the console. In Settings, enable **Allow
-MCP control**. Enable **Allow MCP connection and disconnection** separately if the
-tool needs to start or end sessions. The remote host must also grant **MCP access** for the
+connection metrics, send input, transfer files, and use the console. On the viewer, open
+**Settings → MCP Server** and enable **Allow MCP control**. Enable **Allow MCP connection and
+disconnection** separately if the tool needs to start or end sessions. The remote host must also grant **MCP access** for the
 session; the Robot icon identifies this permission. MCP access is off by default. Console commands
 also require remote control permission. Revoking either permission prevents further requests.
 MCP screenshots temporarily request a frame at the host desktop's full resolution, even if the
@@ -511,6 +512,19 @@ connect to the intended PC, inspect screenshots, click visible controls and oper
 software installers within the authorized task. Reading the guide needs no remote
 session and does not change the permissions required for remote actions.
 
+### Read the active window's UI tree
+
+With version 0.4.174 or later on both sides, `get_session_ui_tree` reads the active window
+on a Windows or Linux host. On the host, open **Settings → MCP Host** and enable
+**Share UI tree with incoming MCP sessions**. This setting is off by default and applies
+to all incoming sessions that have **MCP access**.
+
+The tree contains the names and roles that the application exposes through accessibility.
+Ordinary input fields include their text when available. An empty field returns an empty
+string, and fields marked as passwords are excluded from the tree. On Wayland, available
+bounds are relative to the window. On Windows and X11 they use screen coordinates.
+For MCP mouse commands, use pixel coordinates from the session screenshot.
+
 ## Change application settings
 
 ![Saccadia Remote settings](assets/user-guide/settings.png)
@@ -525,7 +539,8 @@ The Settings window contains:
 - one-time-password access;
 - Wake-on-LAN participation;
 - local diagnostic logging;
-- MCP control and a separate switch for MCP session connection/disconnection;
+- **MCP Server** settings for MCP control and session connection/disconnection;
+- **MCP Host** settings for sharing the active window's UI tree with incoming MCP sessions;
 - interface language.
 
 The screenshot shows the official public service address and its public verification pin. A pin is

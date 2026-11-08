@@ -11,7 +11,7 @@ find each other do not need access to the contents of a remote session.
 
 ## Official service and software
 
-Current package release: **0.4.173**. See [packages and checksums](packages/README.md).
+Current package release: **0.4.174**. See [packages and checksums](packages/README.md).
 
 This release improves Android LAN route publication, relay selection and bandwidth
 re-evaluation, and video pacing and budget recovery. The UDP payload limit remains
@@ -49,12 +49,15 @@ screen. See the [user guide](USER-GUIDE.md#manage-recent-connections).
 The Android viewer includes platform-specific shortcuts and a touchpad mode
 saved separately for each remote computer. See the
 [Android user guide](ANDROID-USER-GUIDE.md#touchpad-mode).
-This release adds MCP initialization instructions and a connection-independent
+Version 0.4.174 adds the active window's accessibility tree for Windows and Linux hosts.
+The host controls sharing in **Settings → MCP Host**. See the
+[User Guide](USER-GUIDE.md#read-the-active-windows-ui-tree).
+The gateway also provides MCP initialization instructions and a connection-independent
 `get_usage_guide` tool with the [AI usage skill](skills/saccadia-remote/SKILL.md),
 covering connections, screenshot-based desktop control and authorized software tasks.
 It retains the Windows privacy curtain fixes and coordinated file-transfer recovery.
 See [Private Mode](USER-GUIDE.md#private-mode-on-the-host).
-This release includes the session Console tab and local MCP gateway for Windows and Linux clients.
+Windows and Linux clients include the session Console tab and local MCP gateway.
 The Console tab keeps session navigation visible and provides a full-width output area with scrolling.
 Both require explicit permission from the remote host; MCP access is disabled by default.
 See the [MCP integration guide](MCP.md) for setup, host/viewer permissions, tools,

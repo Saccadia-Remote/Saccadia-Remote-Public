@@ -47,6 +47,13 @@ not outgoing desktops you can operate. Never substitute an incoming session ID.
    and choose the next action. A successful `sent` response confirms input was sent,
    not that the application completed the requested operation.
 
+On a Windows or Linux host, `get_session_ui_tree(sessionId)` can help identify
+controls by name, role and state in the foreground window. It requires MCP
+access for the session and **Share UI tree with incoming MCP sessions** under
+**MCP Host** on the remote computer. A snapshot can be partial, and element
+bounds can be missing. Wayland bounds are relative to the window. Use the current
+screenshot for mouse coordinates.
+
 For example, if a 1920x1080 screenshot shows the intended button at (1400,900), use:
 
 ```json
